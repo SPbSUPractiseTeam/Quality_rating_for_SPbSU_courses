@@ -1,0 +1,39 @@
+
+.fon{
+    background-color: #b2b2b0;
+    border: 1px solid gray;   
+    border-radius: 5px; 
+    height: 215px;;
+    width: 354px;
+    margin-top:220px;    
+    margin-left:350px;  
+}   
+p{
+    color:white;
+    margin-top:60px;
+    margin-left:230px;
+    font-size:24px;
+    font-family: Avantgarde, TeX Gyre Adventor, URW Gothic L, sans-serif;
+}
+#usr{   
+    margin-left:25px;
+    width:300px;
+}
+#psswrd{
+   
+    margin-left:25px;
+    width:300px;
+    }
+.Signinbtn{
+    margin-top:10px;
+    margin-left: 255px;
+    background-color: #2b3137;
+}
+.usrlabel{
+    margin-top: 10px;
+    margin-left: 25px;    
+}
+.pswrdlabel{
+    margin-top:5px;
+    margin-left:25px;
+}
