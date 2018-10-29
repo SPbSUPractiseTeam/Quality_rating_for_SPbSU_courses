@@ -1,0 +1,58 @@
+
+.logo{
+    height: 80px;
+    background-color:#080808;
+    padding: 10px;
+}
+body{
+
+    background-color: white;
+}
+.logoimg{
+    margin-left:20px   ;
+    height:60px;
+    color:white;
+}
+.sobaka{
+    margin : auto;
+    padding: 40px;
+    padding-bottom: 30px;
+    background-color: #f5f5f5;
+    border : 1px solid gray;
+    border-radius: 10px;
+
+}
+.auth{
+  width : 100%;
+}
+.logo p{
+
+      margin-top:10px;
+      font-size:18px;
+      line-height: 20px;
+      font-family: Avantgarde, TeX Gyre Adventor, URW Gothic L, sans-serif;
+}
+p{
+    color:white;
+    margin-top:10px;
+    font-size:20px;
+    line-height: 20px;
+    font-family: Avantgarde, TeX Gyre Adventor, URW Gothic L, sans-serif;
+}
+#usr{
+    width:300px;
+}
+#psswrd{
+    width:300px;
+    }
+.Signinbtn{
+    margin-top:20px;
+    background-color: #2b3137;
+    float: right;
+
+}
+.usrlabel{
+  }
+.pswrdlabel{
+    margin-top:10px;
+}
