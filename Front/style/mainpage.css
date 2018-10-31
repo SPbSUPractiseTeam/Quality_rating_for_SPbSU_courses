@@ -31,7 +31,7 @@ p{
   border: 1px solid ;
   border-radius: 3px; ;
 
-    background-color: #f5f5f5;
+  background-color: #f5f5f5;
 }
 /*кнопка выхода*/
 .exit{
@@ -44,10 +44,16 @@ p{
   margin-top: 5px;
   padding: 10px;
 }
-.Main{
+/*кнопка добавления логов*/
+.addBtn{
+  background: #f5f5f5;
+  color: black;
+  border: none;
+  width : auto;
+  height: auto;
 }
 /*колонка выбора курсов*/
-.RowLeft{
+.rowLeft{
   background-color: #f5f5f5;
   margin-top: 20px;
   padding-left:20px;
@@ -55,7 +61,21 @@ p{
   color: black;
 }
 /*колонка статистики*/
-.RowRight{
+.rowRight{
   padding-top:20px;
 
+}
+.arhiv{
+  display: none;
+}
+.statistika{
+  display: inline;
+}
+.nedeli{
+  display: inline;
+  width : 200px;
+  border-right:  1px solid gray;
+}
+.nedeli hr{
+  width:
 }
