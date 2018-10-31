@@ -22,27 +22,27 @@
 <div class="container-fluid fon">
   <div class="row">
     <div class="col-3 rowLeft">
-      <p>Введение в биоинформатику:Математика</p>
+      <button type="button" class="btn btn-default cours" onclick="my_f('archiv')">Введение в биоинформатику:Математика</button>
       <hr>
-      <p>Механика</p>
+      <button type="button" class="btn btn-default cours" onclick="my_f('archiv')">Механика</button>
       <hr>
-      <p>Менеджмент качества при создании инновационных продуктов</p>
+      <button type="button" class="btn btn-default cours" onclick="my_f('archiv')">Менеджмент качества при создании <br>инновационных продуктов</button>
       <hr>
-      <p>Японский язык. Начальный уровень</p>
+      <button type="button" class="btn btn-default cours" onclick="my_f('archiv')">Японский язык. Начальный уровень</button>
       <hr>
-      <p>Физическая химия. Кинетика</p>
+      <button type="button" class="btn btn-default cours" onclick="my_f('archiv')">Физическая химия. Кинетика</button>
       <hr>
-      <p>Теория механизмов и машин</p>
+      <button type="button" class="btn btn-default cours" onclick="my_f('archiv')">Теория механизмов и машин</button>
       <hr>
-      <p>Наука о данных и аналитика больших объемов данных</p>
+      <button type="button" class="btn btn-default cours" onclick="my_f('archiv')">Наука о данных и аналитика больших <br> объемов данных</button>
       <hr>
-      <p>История и философия технической реальности</p>
+      <button type="button" class="btn btn-default cours" onclick="my_f('archiv')">История и философия технической <br> реальности</button>
       <hr>
       <button type="button" class="btn btn-default  insert">Добавить новый курс</button>
     </div>
       <div class="col-9 rowRight">
         <div class="row">
-          <div class="col-9 arhiv">
+          <div class="col-9 arhiv" id="archiv">
             <p>Архив</p>
           </div>
           <div class="col-3 nedeli">
@@ -67,5 +67,11 @@
 </div>
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
 <script src="js/mainpage.js"></script>
+<script>
+	function my_f(Id) {
+	    var o=document.getElementById(Id)
+	    o.style.display = (o.style.display == 'none')? 'block': 'none'
+	}
+</script>
 </body>
 </html>
