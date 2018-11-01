@@ -11,7 +11,7 @@
 
 </head>
 <body>
-<!---->
+<!--ШАПКА-->
 <div class="container-fluid">
     <div class="row logo">
         <img class="logoimg" src="orel.png">
@@ -23,57 +23,61 @@
 <div class="container-fluid fon">
   <div class="row">
     <div class="col-3 rowLeft">
-      <!---->
+      <!--КНОПКИ ВЫБОРА ДОСТУПНЫХ КУРСОВ-->
       <button type="button" class="btn btn-default cours" onclick="show('1')">Введение в биоинформатику:Математика</button>
       <hr>
       <button type="button" class="btn btn-default cours" onclick="show('2')">Механика</button>
       <hr>
-      <button type="button" class="btn btn-default cours" onclick="show('archiv')">Менеджмент качества при создании <br>инновационных продуктов</button>
+      <button type="button" class="btn btn-default cours" onclick="show('3')">Менеджмент качества при создании <br>инновационных продуктов</button>
       <hr>
-      <button type="button" class="btn btn-default cours" onclick="show('archiv')">Японский язык. Начальный уровень</button>
+      <button type="button" class="btn btn-default cours" onclick="show('4')">Японский язык. Начальный уровень</button>
       <hr>
-      <button type="button" class="btn btn-default cours" onclick="show('archiv')">Физическая химия. Кинетика</button>
+      <button type="button" class="btn btn-default cours" onclick="show('5')">Физическая химия. Кинетика</button>
       <hr>
-      <button type="button" class="btn btn-default cours" onclick="show('archiv')">Теория механизмов и машин</button>
+      <button type="button" class="btn btn-default cours" onclick="show('6')">Теория механизмов и машин</button>
       <hr>
-      <button type="button" class="btn btn-default cours" onclick="show('archiv')">Наука о данных и аналитика больших <br> объемов данных</button>
+      <button type="button" class="btn btn-default cours" onclick="show('7')">Наука о данных и аналитика больших <br> объемов данных</button>
       <hr>
-      <button type="button" class="btn btn-default cours" onclick="show('archiv')">История и философия технической <br> реальности</button>
+      <button type="button" class="btn btn-default cours" onclick="show('8')">История и философия технической <br> реальности</button>
       <hr>
       <button type="button" class="btn btn-default  insert">Добавить новый курс</button>
     </div>
-    <!---->
+    <!--ВЫВОД СТАТИСТИКИ-->
     <div class="col-9 rowRight">
-      <div class="row">
         <div class="col-9 arhiv" id='1'>
-          <div class="new-select-style-wpandyou">
-            <label for="sel1">Выберите дату загрузки:</label>
-            <select id="sel1">
-             <option>25.05.2018</option>
-             <option>07.06.2018</option>
-             <option>15.06.2018</option>
-             <option>31.06.2018</option>
+          <div class="new-select-style-wpandyou" >
+            <p>Дата загрузки</p>
+            <select class="dataSelect" id="sel1">
+             <option value="0">25.05.2018</option>
+             <option value="1">07.06.2018</option>
+             <option value="2">15.06.2018</option>
+             <option value="3">31.06.2018</option>
             </select>
           </div>
         </div>
         <div class="col-9 arhiv" id='2'>
-            <p>Архив</p>
-        </div>
-        <div class="col-3 nedeli">
-              <p>Первая неделя</p>
-              <hr>
-              <p>Вторая неделя</p>
-              <hr>
-              <p>Третья неделя</p>
-              <hr>
-              <p>Четвертая неделя</p>
-              <hr>
-              <p>Пятая неделя</p>
-              <hr>
-        </div>
-        <div class="col-6 statistika">
-            <p>Введение в биоинформатику:Математика</p>
+          <div class="new-select-style-wpandyou" >
             <p>Дата загрузки</p>
+            <select class="dataSelect" id="sel1">
+             <option value="0">23.05.2018</option>
+             <option value="1">19.06.2018</option>
+             <option value="2">07.06.2018</option>
+             <option value="3">31.06.2018</option>
+            </select>
+          </div>
+        </div>
+        <div class="row">
+        <div class="col-3 nedeli">
+              <button type="button" class="btn btn-default cours">Первая неделя</button>
+              <hr>
+              <button type="button" class="btn btn-default cours">Вторая неделя</button>
+              <hr>
+              <button type="button" class="btn btn-default cours">Третья неделя</button>
+              <hr>
+              <button type="button" class="btn btn-default cours">Четвертая неделя</button>
+              <hr>
+              <button type="button" class="btn btn-default cours">Пятая неделя</button>
+              <hr>
         </div>
       </div>
     </div>

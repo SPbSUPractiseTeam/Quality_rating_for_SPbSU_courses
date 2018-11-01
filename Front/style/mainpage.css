@@ -15,7 +15,9 @@ body{
     color:black;
     background-color: #f5f5f5;
 }
-
+br{
+  height: 5px;
+}
 .fon{
   background-color: #f5f5f5;
 }
@@ -26,7 +28,6 @@ p{
     font-family: Avantgarde, TeX Gyre Adventor, URW Gothic L, sans-serif;
 }
 label{
-
   font-size:18px;
   line-height: 20px;
   font-family: Avantgarde, TeX Gyre Adventor, URW Gothic L, sans-serif;
@@ -85,25 +86,17 @@ label{
   border-right: 1px solid gray;
   color: black;
 }
-.rowLeft hr{
+hr{
   margin:2px;
-}
-/*колонка статистики*/
-.rowRight{
-  padding-top:20px;
-
 }
 .arhiv{
   display: none;
 }
-.statistika{
-  display: none;
-}
+/*колнка недель*/
 .nedeli{
   display: none;
   width : 200px;
   border-right:  1px solid gray;
-}
-.nedeli hr{
-  width:
+  padding-left:5px;
+  padding-right: 5px;
 }
