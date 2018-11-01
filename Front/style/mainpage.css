@@ -25,6 +25,12 @@ p{
     line-height: 20px;
     font-family: Avantgarde, TeX Gyre Adventor, URW Gothic L, sans-serif;
 }
+label{
+
+  font-size:18px;
+  line-height: 20px;
+  font-family: Avantgarde, TeX Gyre Adventor, URW Gothic L, sans-serif;
+}
 /*кнопка выбора курса*/
 .cours{
     font-size:18px;
