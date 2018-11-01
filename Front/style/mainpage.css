@@ -56,11 +56,11 @@ p{
   background-color:  #f5f5f5;
   border: none;
   color: black;
-  height: 50px;
+  height: 40px;
   position: absolute;
   right : 40px;
-  margin-top: 5px;
-  padding: 10px;
+  margin-top: 12px;
+  padding: auto;
 }
 /*кнопка добавления логов*/
 .addBtn{
