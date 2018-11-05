@@ -44,9 +44,9 @@
     </div>
     <!--ВЫВОД СТАТИСТИКИ-->
     <div class="col-9 rowRight">
-        <div class="col-9 arhiv" id='1'>
-            <!--Cписки дат-->
-            <div class="row" >
+        <div class="col-9 arhiv i" id = "1" >
+            <!--Cписки дат и недель-->
+            <div class="row top" >
                 <select class="dataSelect sel1" >
                     <option value="0" selected='selected'>25.05.2018 </option>
                     <option value="1">07.06.2018</option>
@@ -59,10 +59,39 @@
                     <option value="2">Вторая неделя</option>
                     <option value="3">Третья неделя</option>
                 </select>
-           </div> 
+            </div>             
+            <hr>    
+            <p><b>Cтатистика видеоресурсов</b></p>
+            <div class="row">
+            <div class="video" id = "video_1">
+                    <p class="hash" id='ref_1'><a href="https://courses.openedu.ru/courses/course-v1:mipt+ADV_GRAPHS+fall_2018/courseware/418d03eb0a3d4f04b81e591f512ac3f9/b243cbc97cf3418a8c8ea4703ddf2e8f">Видео</a> #1 </p>   
+                    
+                    <button class="btn btn-medium">
+                          <i class="arrow" ></i></button>         
+              <p>Процент просмотренных материалов : <span id="video__proc_1">75.1%</span></p>
+              <p>Процент пользователей смотревших видео : <span id="video_proc_2">67.53%</span></p>
+              <p>Диаграмма пересмотренных моментов</p>
+              <img class="diagramma" src="out.png">
+            </div>
+            </div>  
+            <div class="row">
+                <div class="video">  
+                    
+              <p class="hash" id='ref_1'><a href="https://courses.openedu.ru/courses/course-v1:mipt+ADV_GRAPHS+fall_2018/courseware/418d03eb0a3d4f04b81e591f512ac3f9/b243cbc97cf3418a8c8ea4703ddf2e8f">Видео</a> #1 </p>   
+              
+              <button type="button">
+                    <img src="arrow.png">        
+            </button>                    
+                <p>Процент просмотренных материалов : <span id="video__proc_1">73.2%</span></p>
+                <p>Процент пользователей смотревших видео : <span id="video_proc_2">88.53%</span></p>
+                <p>Диаграмма пересмотренных моментов</p>
+                <img class="diagramma" src="out.png">
+                
+              </div>
+            </div>
+            <hr>
         </div>
         <div class="col-9 arhiv" id='2'>
-            <!--Cписки дат-->
             <div class="row" >
                 <select class="dataSelect sel1" >
                     <option value="0" selected='selected'>25.05.2018 </option>

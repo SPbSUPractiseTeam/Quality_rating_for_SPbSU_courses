@@ -12,7 +12,7 @@ function hide(Id){
   o.style.display = 'none';
 }
 $(document).ready(function() {
-  var h=$(this).height();
+  var h=document.height();
   $(".rowLeft").height(h);
   $(".nedeli").height(h);
 });
