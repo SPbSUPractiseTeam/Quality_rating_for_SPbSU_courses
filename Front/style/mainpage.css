@@ -93,16 +93,6 @@ hr{
 .arhiv{
   display: none;
 }
-/*колнка недель*/
-.nedeli{
-  display: inline;
-  width : 200px;
-  border-right:  1px solid gray;
-  margin-top: 26px;
-  padding-left:5px;
-  padding-right: 5px;
-}
-
 /*списки*/
 .dataSelect{
   margin-top: 7px;
