@@ -73,9 +73,8 @@ label{
 .addBtn{
   background: #f5f5f5;
   color: black;
-  border: none;
-  width : auto;
-  height: auto;
+  border: 1px solid gray;
+  height: 40px;
 }
 /*колонка выбора курсов*/
 .rowLeft{
@@ -86,9 +85,11 @@ label{
   border-right: 1px solid gray;
   color: black;
 }
+/*разделители*/
 hr{
   margin:2px;
 }
+/*блок статистики*/
 .arhiv{
   display: none;
 }
@@ -100,4 +101,15 @@ hr{
   margin-top: 26px;
   padding-left:5px;
   padding-right: 5px;
+}
+
+/*списки*/
+.dataSelect{
+  margin-top: 7px;
+}
+.sel1{
+    margin-left: 10px;
+}
+.sel2{
+  margin-left: 10px;
 }

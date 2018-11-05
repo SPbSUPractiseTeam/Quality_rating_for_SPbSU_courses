@@ -17,3 +17,6 @@ function hide(Id){
             $(".nedeli").height(h);
         });
         
+$("select" ).change(function() {  
+    console.log(s);
+});
