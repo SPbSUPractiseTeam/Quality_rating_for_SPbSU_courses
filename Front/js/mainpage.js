@@ -12,11 +12,22 @@ function hide(Id){
   o.style.display = 'none';
 }
 $(document).ready(function() {
-  var h=document.height();
+  var h=$(this).height();
   $(".rowLeft").height(h);
-  $(".nedeli").height(h);
+  $(".fon").height(h);  
 });
         
 $("select" ).change(function() {  
-    console.log(s);
+  var data = ($(".sel1").val());
+  var week = ($(".sel2").val());  
+  s = "stat_data_"+data+"_week_"+week;
+  var list = document.getElementsByClassName('stat');
+  for (var i = 0; i < list.length; i++) {
+    hide(list[i].id);
+  }
+  var o = document.getElementById(s);
+  o.style.display="inline";
+  console.log(o);
+  console.log(s);
+  
 });

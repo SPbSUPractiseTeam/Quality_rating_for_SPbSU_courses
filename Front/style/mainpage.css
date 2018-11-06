@@ -118,7 +118,9 @@ hr{
   padding-bottom:10px;
   border: solid gray 1px; 
 }
-.arrow{
-  background-image: url("/arrow.png");
-  
+.stat{
+  display:none;
+}
+#stat_data_0_week_1{
+  display: inline;
 }
