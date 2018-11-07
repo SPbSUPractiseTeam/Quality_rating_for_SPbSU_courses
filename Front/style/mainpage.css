@@ -128,3 +128,47 @@ hr{
   display: none;
   margin-top: 100px;
 }
+/*кнопка загрузки файлов*/
+.btn-file {
+  position: relative;
+  overflow: hidden;
+  border: 1px solid gray; 
+  margin-left: -13px;
+  margin-top: 10px; 
+}
+.btn-file input[type=file] {
+  position: absolute;
+  top: 0;
+  right: 0;
+  min-width: 100%;
+  min-height: 100%;
+  font-size: 100px;
+  text-align: right;
+  filter: alpha(opacity=0);
+  opacity: 0;
+  background: red;
+  cursor: inherit;
+  display: block;
+}
+.file-input-label {
+	padding: 0px 10px;
+	display: table-cell;
+	vertical-align: middle;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  margin-top: 10px;
+  height: 38px;
+  margin-left: 5px;
+  width: 200px;
+}
+input[readonly] {
+  background-color: white !important;
+  cursor: text !important;
+}
+/* сохранить */
+.saveBtn{
+  background-color: white;  
+  color : black;  
+  margin-left: -13px;
+  margin-top: 4px;
+}
