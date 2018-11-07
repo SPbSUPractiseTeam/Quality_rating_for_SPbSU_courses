@@ -96,6 +96,7 @@ hr{
 /*списки*/
 .dataSelect{
   margin-top: 7px;
+  height: 42px;
 }
 .sel1{
     margin-left: 10px;
@@ -171,4 +172,14 @@ input[readonly] {
   color : black;  
   margin-left: -13px;
   margin-top: 4px;
+}
+.load{
+  margin-left: 570px;
+}
+.saveBtnMain{
+  margin-left: 5px;
+  background-color: white;
+  color: black;
+  height: 38px;
+  margin-top: 10px;
 }

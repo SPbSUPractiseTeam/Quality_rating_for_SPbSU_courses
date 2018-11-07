@@ -46,7 +46,7 @@
     <div class="col-9 rowRight">
         <!--Див добавления нового курса-->
         <div class ="col-9  arhiv cours" id = "newCours">
-                <p>Новый курс</p>
+                <h3>Новый курс</h3>
                 <p>Введите название курса</p>
                 <input type = "text" value="">
                 <div class="col-lg-6 col-sm-6 col-12">
@@ -60,202 +60,197 @@
                         </div>
                     <button type="button" class="btn btn-success saveBtn">Сохранить</button>
                 </div>
-                    
-            </div>
-        <div class="col-9 arhiv " id = "1" >
-            
+        </div>
+        <div class="col-9 arhiv" id="1" >            
             <!--Cписки дат и недель-->
-            <div class="row top" >
-                <select class="dataSelect sel1" >
-                    <option value="0" selected>25.05.2018 </option>
-                    <option value="1">07.06.2018</option>
-                    <option value="2">15.06.2018</option>
-                    <option value="3">31.06.2018</option>
-                </select>
-                <select class="dataSelect sel2">
-                    <option value="1" selected>Первая неделя</option>
-                    <option value="2">Вторая неделя</option>
-                    <option value="3">Третья неделя</option>
-                    <option value="4">Четвертая неделя</option>
-                </select>
+            <div class="row">
+                <div class="col-3 top" >
+                    <select class="dataSelect sel1" >
+                        <option value="0" selected>25.05.2018 </option>
+                        <option value="1">07.06.2018</option>
+                        <option value="2">15.06.2018</option>
+                        <option value="3">31.06.2018</option>
+                    </select>
+                    <select class="dataSelect sel2">
+                        <option value="1" selected>Первая неделя</option>
+                        <option value="2">Вторая неделя</option>
+                        <option value="3">Третья неделя</option>
+                        <option value="4">Четвертая неделя</option>
+                    </select>
+                </div>            
+                <div class=" load">
+                    <div class="input-group">
+                          <span class="input-group-btn">
+                            <label class="btn btn-default btn-file" for="multiple_input_group">
+                              <div class="input required"><input id="multiple_input_group" type="file" multiple></div> Выбрать файл
+                            </label>
+                          </span>                          
+                          <span class="file-input-label"></span>
+                          <button type="button" class="btn btn-success saveBtnMain">Загрузить</button>
+                    </div>             
+                </div>
             </div>             
-            <hr>   
-                <div class="stat " id="stat_data_0_week_1"> 
-                <p><b>Cтатистика видеоресурсов</b></p>
-                        <div class="video">
-                            <p class="hash" id='ref_1'><a href="https://courses.openedu.ru/courses/course-v1:mipt+ADV_GRAPHS+fall_2018/courseware/418d03eb0a3d4f04b81e591f512ac3f9/b243cbc97cf3418a8c8ea4703ddf2e8f">Видео</a> #1 </p>   
-                                <details >       
-                                    <summary>Подробнее</summary>                    
+        <hr>   
+        <!--Статстика-->
+        <div class="stat " id="stat_data_0_week_1"> 
+            <p><b>Cтатистика видеоресурсов</b></p>
+                    <div class="video">
+                        <p class="hash" id='ref_1'><a href="https://courses.openedu.ru/courses/course-v1:mipt+ADV_GRAPHS+fall_2018/courseware/418d03eb0a3d4f04b81e591f512ac3f9/b243cbc97cf3418a8c8ea4703ddf2e8f">Видео</a> #1 </p>   
+                            <details>       
+                                <summary>Подробнее</summary>                    
                                         <p>Процент просмотренных материалов : <span id="video__proc_1">75.1%</span></p>
                                         <p>Процент пользователей смотревших видео : <span id="video_proc_2">67.53%</span></p>
-                                        <p>Диаграмма пересмотренных моментов</p>
-                                        
+                                        <p>Диаграмма пересмотренных моментов</p>                                        
                                         <img class="diagramma" src="out.png">
-                                    </details>
-                        </div>
-                      
-                        <div class="video">                      
-                            <p class="hash" id='ref_1'><a href="https://courses.openedu.ru/courses/course-v1:mipt+ADV_GRAPHS+fall_2018/courseware/418d03eb0a3d4f04b81e591f512ac3f9/b243cbc97cf3418a8c8ea4703ddf2e8f">Видео</a> #2  </p>   
-                                <details > 
-                                    <summary>Подробнее</summary>                
-                                <p>Процент просмотренных материалов : <span id="video__proc_1">73.2%</span></p>
-                                <p>Процент пользователей смотревших видео : <span id="video_proc_2">88.53%</span></p>
-                                <p>Диаграмма пересмотренных моментов</p>
-                                <img class="diagramma" src="out.png">
-                                </details>
-                        </div>
-                            <div class="video">
-                                <p class="hash" id='ref_1'><a href="https://courses.openedu.ru/courses/course-v1:mipt+ADV_GRAPHS+fall_2018/courseware/418d03eb0a3d4f04b81e591f512ac3f9/b243cbc97cf3418a8c8ea4703ddf2e8f">Видео</a> #3 </p>   
-                                    <details >       
-                                        <summary>Подробнее</summary>                    
-                                            <p>Процент просмотренных материалов : <span id="video__proc_1">92.1%</span></p>
-                                            <p>Процент пользователей смотревших видео : <span id="video_proc_2">76.29%</span></p>
-                                            <p>Диаграмма пересмотренных моментов</p>
-                                            
-                                            <img class="diagramma" src="out.png">
-                                    </details>
-                            </div>
-                    <hr>
-                    <p><b>Статистика теста</b></p>
-                            <div class="test">
-                                <p>Средний балл теста: <span id="test_average">4.321</span></p>
-                                <p>Среднee время прохождения теста: <span id="time_average_min">15</span> минут <span id="time_average_sec">20</span> секунд</p>
-                                <p>Доля правильных ответов к каждому вопросу:</p>
-                                <p>1. 78%</p>
-                                <p>2. 56%</p>
-                                <p>3. 93%</p>
-                                <p>4. 82%</p>
-                                <p>5. 90%</p>
-                                <p><a href="https://courses.openedu.ru/courses/course-v1:mipt+ADV_GRAPHS+fall_2018/courseware/418d03eb0a3d4f04b81e591f512ac3f9/b243cbc97cf3418a8c8ea4703ddf2e8f">Видео</a> к которому возвращались чаще всего</p>
-                            </div>
-                </div>  
-                <div class="stat " id="stat_data_0_week_2"> 
-                <p><b>Cтатистика видеоресурсов</b></p>
-                        <div class="video">
-                            <p class="hash" id='ref_1'><a href="https://courses.openedu.ru/courses/course-v1:mipt+ADV_GRAPHS+fall_2018/courseware/418d03eb0a3d4f04b81e591f512ac3f9/b243cbc97cf3418a8c8ea4703ddf2e8f">Видео</a> #1 </p>   
-                                <details >       
-                                    <summary>Подробнее</summary>                    
-                                        <p>Процент просмотренных материалов : <span id="video__proc_1">74.2%</span></p>
-                                        <p>Процент пользователей смотревших видео : <span id="video_proc_2">87.43%</span></p>
-                                        <p>Диаграмма пересмотренных моментов</p>
-                                        
-                                        <img class="diagramma" src="out.png">
-                                    </details>
-                        </div>
-                      
-                        <div class="video">                      
-                            <p class="hash" id='ref_1'><a href="https://courses.openedu.ru/courses/course-v1:mipt+ADV_GRAPHS+fall_2018/courseware/418d03eb0a3d4f04b81e591f512ac3f9/b243cbc97cf3418a8c8ea4703ddf2e8f">Видео</a> #2  </p>   
-                                <details > 
-                                    <summary>Подробнее</summary>                
-                                <p>Процент просмотренных материалов : <span id="video__proc_1">73.2%</span></p>
-                                <p>Процент пользователей смотревших видео : <span id="video_proc_2">88.53%</span></p>
-                                <p>Диаграмма пересмотренных моментов</p>
-                                <img class="diagramma" src="out.png">
-                                </details>
-                        </div>
-                            <div class="video">
-                                <p class="hash" id='ref_1'><a href="https://courses.openedu.ru/courses/course-v1:mipt+ADV_GRAPHS+fall_2018/courseware/418d03eb0a3d4f04b81e591f512ac3f9/b243cbc97cf3418a8c8ea4703ddf2e8f">Видео</a> #3 </p>   
-                                    <details >       
-                                        <summary>Подробнее</summary>                    
-                                            <p>Процент просмотренных материалов : <span id="video__proc_1">92.1%</span></p>
-                                            <p>Процент пользователей смотревших видео : <span id="video_proc_2">76.29%</span></p>
-                                            <p>Диаграмма пересмотренных моментов</p>
-                                            
-                                            <img class="diagramma" src="out.png">
-                                    </details>
-                            </div>
-                            <div class="video">
-                                    <p class="hash" id='ref_1'><a href="https://courses.openedu.ru/courses/course-v1:mipt+ADV_GRAPHS+fall_2018/courseware/418d03eb0a3d4f04b81e591f512ac3f9/b243cbc97cf3418a8c8ea4703ddf2e8f">Видео</a> #4 </p>   
-                                        <details >       
-                                            <summary>Подробнее</summary>                    
-                                                <p>Процент просмотренных материалов : <span id="video__proc_1">92.1%</span></p>
-                                                <p>Процент пользователей смотревших видео : <span id="video_proc_2">76.29%</span></p>
-                                                <p>Диаграмма пересмотренных моментов</p>
-                                                
-                                                <img class="diagramma" src="out.png">
-                                        </details>
-                                </div>
-                                
-                        
-                    <hr>
-                    <p><b>Статистика теста</b></p>
-                            <div class="test">
-                                <p>Средний балл теста: <span id="test_average">4.321</span></p>
-                                <p>Среднee время прохождения теста: <span id="time_average_min">15</span> минут <span id="time_average_sec">20</span> секунд</p>
-                                <p>Доля правильных ответов к каждому вопросу:</p>
-                                <p>1. 74%</p>
-                                <p>2. 66%</p>
-                                <p>3. 83.1%</p>
-                                <p>4. 82.2%</p>
-                                <p>5. 90%</p>
-                                <p><a href="https://courses.openedu.ru/courses/course-v1:mipt+ADV_GRAPHS+fall_2018/courseware/418d03eb0a3d4f04b81e591f512ac3f9/b243cbc97cf3418a8c8ea4703ddf2e8f">Видео</a> к которому возвращались чаще всего</p>
-                            </div>
-                </div>
-                <div class="stat " id="stat_data_1_week_1"> 
-                        <p><b>Cтатистика видеоресурсов</b></p>
-                                <div class="video">
-                                    <p class="hash" id='ref_1'><a href="https://courses.openedu.ru/courses/course-v1:mipt+ADV_GRAPHS+fall_2018/courseware/418d03eb0a3d4f04b81e591f512ac3f9/b243cbc97cf3418a8c8ea4703ddf2e8f">Видео</a> #1 </p>   
-                                        <details >       
-                                            <summary>Подробнее</summary>                    
-                                                <p>Процент просмотренных материалов : <span id="video__proc_1">74.2%</span></p>
-                                                <p>Процент пользователей смотревших видео : <span id="video_proc_2">87.43%</span></p>
-                                                <p>Диаграмма пересмотренных моментов</p>
-                                                
-                                                <img class="diagramma" src="out.png">
-                                            </details>
-                                </div>
-                              
-                                <div class="video">                      
-                                    <p class="hash" id='ref_1'><a href="https://courses.openedu.ru/courses/course-v1:mipt+ADV_GRAPHS+fall_2018/courseware/418d03eb0a3d4f04b81e591f512ac3f9/b243cbc97cf3418a8c8ea4703ddf2e8f">Видео</a> #2  </p>   
-                                        <details > 
-                                            <summary>Подробнее</summary>                
+                            </details>
+                    </div>                      
+                    <div class="video">                      
+                        <p class="hash" id='ref_1'><a href="https://courses.openedu.ru/courses/course-v1:mipt+ADV_GRAPHS+fall_2018/courseware/418d03eb0a3d4f04b81e591f512ac3f9/b243cbc97cf3418a8c8ea4703ddf2e8f">Видео</a> #2  </p>   
+                        <details > 
+                                        <summary>Подробнее</summary>                
                                         <p>Процент просмотренных материалов : <span id="video__proc_1">73.2%</span></p>
                                         <p>Процент пользователей смотревших видео : <span id="video_proc_2">88.53%</span></p>
                                         <p>Диаграмма пересмотренных моментов</p>
                                         <img class="diagramma" src="out.png">
-                                        </details>
-                                </div>
-                                    <div class="video">
-                                        <p class="hash" id='ref_1'><a href="https://courses.openedu.ru/courses/course-v1:mipt+ADV_GRAPHS+fall_2018/courseware/418d03eb0a3d4f04b81e591f512ac3f9/b243cbc97cf3418a8c8ea4703ddf2e8f">Видео</a> #3 </p>   
-                                            <details >       
-                                                <summary>Подробнее</summary>                    
-                                                    <p>Процент просмотренных материалов : <span id="video__proc_1">92.1%</span></p>
-                                                    <p>Процент пользователей смотревших видео : <span id="video_proc_2">76.29%</span></p>
-                                                    <p>Диаграмма пересмотренных моментов</p>
-                                                    
-                                                    <img class="diagramma" src="out.png">
-                                            </details>
-                                    </div>
-                                    <div class="video">
-                                            <p class="hash" id='ref_1'><a href="https://courses.openedu.ru/courses/course-v1:mipt+ADV_GRAPHS+fall_2018/courseware/418d03eb0a3d4f04b81e591f512ac3f9/b243cbc97cf3418a8c8ea4703ddf2e8f">Видео</a> #4 </p>   
-                                                <details >       
-                                                    <summary>Подробнее</summary>                    
-                                                        <p>Процент просмотренных материалов : <span id="video__proc_1">92.1%</span></p>
-                                                        <p>Процент пользователей смотревших видео : <span id="video_proc_2">76.29%</span></p>
-                                                        <p>Диаграмма пересмотренных моментов</p>
-                                                        
-                                                        <img class="diagramma" src="out.png">
-                                                </details>
-                                        </div>
-                                        
-                                
-                            <hr>
-                            <p><b>Статистика теста</b></p>
-                                    <div class="test">
-                                        <p>Средний балл теста: <span id="test_average">4.321</span></p>
-                                        <p>Среднee время прохождения теста: <span id="time_average_min">15</span> минут <span id="time_average_sec">20</span> секунд</p>
-                                        <p>Доля правильных ответов к каждому вопросу:</p>
-                                        <p>1. 94%</p>
-                                        <p>2. 96%</p>
-                                        <p>3. 93.1%</p>
-                                        <p>4. 92.2%</p>
-                                        <p>5. 90%</p>
-                                        <p><a href="https://courses.openedu.ru/courses/course-v1:mipt+ADV_GRAPHS+fall_2018/courseware/418d03eb0a3d4f04b81e591f512ac3f9/b243cbc97cf3418a8c8ea4703ddf2e8f">Видео</a> к которому возвращались чаще всего</p>
-                                    </div>
+                        </details>
                         </div>
-                
+                        <div class="video">
+                            <p class="hash" id='ref_1'><a href="https://courses.openedu.ru/courses/course-v1:mipt+ADV_GRAPHS+fall_2018/courseware/418d03eb0a3d4f04b81e591f512ac3f9/b243cbc97cf3418a8c8ea4703ddf2e8f">Видео</a> #3 </p>   
+                                <details >       
+                                    <summary>Подробнее</summary>                    
+                                            <p>Процент просмотренных материалов : <span id="video__proc_1">92.1%</span></p>
+                                            <p>Процент пользователей смотревших видео : <span id="video_proc_2">76.29%</span></p>
+                                            <p>Диаграмма пересмотренных моментов</p>                   
+                                            <img class="diagramma" src="out.png">
+                                </details>
+                            </div>
+                    <hr>
+                    <p><b>Статистика теста</b></p>
+                    <div class="test">
+                        <p>Средний балл теста: <span id="test_average">4.321</span></p>
+                        <p>Среднee время прохождения теста: <span id="time_average_min">15</span> минут <span id="time_average_sec">20</span> секунд</p>
+                        <p>Доля правильных ответов к каждому вопросу:</p>
+                        <p>1. 78%</p>
+                        <p>2. 56%</p>
+                        <p>3. 93%</p>
+                        <p>4. 82%</p>
+                        <p>5. 90%</p>
+                        <p><a href="https://courses.openedu.ru/courses/course-v1:mipt+ADV_GRAPHS+fall_2018/courseware/418d03eb0a3d4f04b81e591f512ac3f9/b243cbc97cf3418a8c8ea4703ddf2e8f">Видео</a> к которому возвращались чаще всего</p>
+                    </div>
+        </div>  
+        <div class="stat " id="stat_data_0_week_2"> 
+            <p><b>Cтатистика видеоресурсов</b></p>
+            <div class="video">
+                <p class="hash" id='ref_1'><a href="https://courses.openedu.ru/courses/course-v1:mipt+ADV_GRAPHS+fall_2018/courseware/418d03eb0a3d4f04b81e591f512ac3f9/b243cbc97cf3418a8c8ea4703ddf2e8f">Видео</a> #1 </p>   
+                <details>       
+                            <summary>Подробнее</summary>                    
+                            <p>Процент просмотренных материалов : <span id="video__proc_1">74.2%</span></p>
+                            <p>Процент пользователей смотревших видео : <span id="video_proc_2">87.43%</span></p>
+                            <p>Диаграмма пересмотренных моментов</p>                                        
+                            <img class="diagramma" src="out.png">
+                </details>
+            </div>           
+            <div class="video">                      
+                <p class="hash" id='ref_1'><a href="https://courses.openedu.ru/courses/course-v1:mipt+ADV_GRAPHS+fall_2018/courseware/418d03eb0a3d4f04b81e591f512ac3f9/b243cbc97cf3418a8c8ea4703ddf2e8f">Видео</a> #2  </p>   
+                <details> 
+                            <summary>Подробнее</summary>                
+                            <p>Процент просмотренных материалов : <span id="video__proc_1">73.2%</span></p>
+                            <p>Процент пользователей смотревших видео : <span id="video_proc_2">88.53%</span></p>
+                            <p>Диаграмма пересмотренных моментов</p>
+                            <img class="diagramma" src="out.png">
+                </details>
+            </div>
+            <div class="video">
+                <p class="hash" id='ref_1'><a href="https://courses.openedu.ru/courses/course-v1:mipt+ADV_GRAPHS+fall_2018/courseware/418d03eb0a3d4f04b81e591f512ac3f9/b243cbc97cf3418a8c8ea4703ddf2e8f">Видео</a> #3 </p>   
+                <details>       
+                            <summary>Подробнее</summary>                    
+                            <p>Процент просмотренных материалов : <span id="video__proc_1">92.1%</span></p>
+                            <p>Процент пользователей смотревших видео : <span id="video_proc_2">76.29%</span></p>
+                            <p>Диаграмма пересмотренных моментов</p>                 
+                            <img class="diagramma" src="out.png">
+                </details>
+            </div>
+            <div class="video">
+                <p class="hash" id='ref_1'><a href="https://courses.openedu.ru/courses/course-v1:mipt+ADV_GRAPHS+fall_2018/courseware/418d03eb0a3d4f04b81e591f512ac3f9/b243cbc97cf3418a8c8ea4703ddf2e8f">Видео</a> #4 </p>   
+                    <details>       
+                            <summary>Подробнее</summary>                    
+                            <p>Процент просмотренных материалов : <span id="video__proc_1">92.1%</span></p>
+                            <p>Процент пользователей смотревших видео : <span id="video_proc_2">76.29%</span></p>
+                            <p>Диаграмма пересмотренных моментов</p>                    
+                            <img class="diagramma" src="out.png">
+                    </details>
+            </div>                             
+            <hr>
+            <p><b>Статистика теста</b></p>
+                    <div class="test">
+                        <p>Средний балл теста: <span id="test_average">4.321</span></p>
+                        <p>Среднee время прохождения теста: <span id="time_average_min">15</span> минут <span id="time_average_sec">20</span> секунд</p>
+                        <p>Доля правильных ответов к каждому вопросу:</p>
+                        <p>1. 74%</p>
+                        <p>2. 66%</p>
+                        <p>3. 83.1%</p>
+                        <p>4. 82.2%</p>
+                        <p>5. 90%</p>
+                        <p><a href="https://courses.openedu.ru/courses/course-v1:mipt+ADV_GRAPHS+fall_2018/courseware/418d03eb0a3d4f04b81e591f512ac3f9/b243cbc97cf3418a8c8ea4703ddf2e8f">Видео</a> к которому возвращались чаще всего</p>
+                    </div>
         </div>
-       
+        <div class="stat " id="stat_data_1_week_1"> 
+            <p><b>Cтатистика видеоресурсов</b></p>
+            <div class="video">
+                <p class="hash" id='ref_1'><a href="https://courses.openedu.ru/courses/course-v1:mipt+ADV_GRAPHS+fall_2018/courseware/418d03eb0a3d4f04b81e591f512ac3f9/b243cbc97cf3418a8c8ea4703ddf2e8f">Видео</a> #1 </p>   
+                <details>       
+                    <summary>Подробнее</summary>                    
+                    <p>Процент просмотренных материалов : <span id="video__proc_1">74.2%</span></p>
+                    <p>Процент пользователей смотревших видео : <span id="video_proc_2">87.43%</span></p>
+                    <p>Диаграмма пересмотренных моментов</p>                               
+                    <img class="diagramma" src="out.png">
+                </details>
+            </div>                              
+            <div class="video">                      
+                <p class="hash" id='ref_1'><a href="https://courses.openedu.ru/courses/course-v1:mipt+ADV_GRAPHS+fall_2018/courseware/418d03eb0a3d4f04b81e591f512ac3f9/b243cbc97cf3418a8c8ea4703ddf2e8f">Видео</a> #2  </p>   
+                <details> 
+                    <summary>Подробнее</summary>                
+                    <p>Процент просмотренных материалов : <span id="video__proc_1">73.2%</span></p>
+                    <p>Процент пользователей смотревших видео : <span id="video_proc_2">88.53%</span></p>
+                    <p>Диаграмма пересмотренных моментов</p>
+                    <img class="diagramma" src="out.png">
+                </details>
+            </div>
+            <div class="video">
+                <p class="hash" id='ref_1'><a href="https://courses.openedu.ru/courses/course-v1:mipt+ADV_GRAPHS+fall_2018/courseware/418d03eb0a3d4f04b81e591f512ac3f9/b243cbc97cf3418a8c8ea4703ddf2e8f">Видео</a> #3 </p>   
+                <details>       
+                    <summary>Подробнее</summary>                    
+                    <p>Процент просмотренных материалов : <span id="video__proc_1">92.1%</span></p>
+                    <p>Процент пользователей смотревших видео : <span id="video_proc_2">76.29%</span></p>
+                    <p>Диаграмма пересмотренных моментов</p>                                    
+                    <img class="diagramma" src="out.png">
+                </details>
+            </div>
+            <div class="video">
+                <p class="hash" id='ref_1'><a href="https://courses.openedu.ru/courses/course-v1:mipt+ADV_GRAPHS+fall_2018/courseware/418d03eb0a3d4f04b81e591f512ac3f9/b243cbc97cf3418a8c8ea4703ddf2e8f">Видео</a> #4 </p>   
+                    <details>      
+                        <summary>Подробнее</summary>                    
+                        <p>Процент просмотренных материалов : <span id="video__proc_1">92.1%</span></p>
+                        <p>Процент пользователей смотревших видео : <span id="video_proc_2">76.29%</span></p>
+                        <p>Диаграмма пересмотренных моментов</p>                                  
+                        <img class="diagramma" src="out.png">
+                    </details>
+            </div>                                                     
+            <hr>
+            <p><b>Статистика теста</b></p>
+            <div class="test">
+                <p>Средний балл теста: <span id="test_average">4.321</span></p>
+                <p>Среднee время прохождения теста: <span id="time_average_min">15</span> минут <span id="time_average_sec">20</span> секунд</p>
+                <p>Доля правильных ответов к каждому вопросу:</p>
+                <p>1. 94%</p>
+                <p>2. 96%</p>
+                <p>3. 93.1%</p>
+                <p>4. 92.2%</p>
+                <p>5. 90%</p>
+                <p><a href="https://courses.openedu.ru/courses/course-v1:mipt+ADV_GRAPHS+fall_2018/courseware/418d03eb0a3d4f04b81e591f512ac3f9/b243cbc97cf3418a8c8ea4703ddf2e8f">Видео</a> к которому возвращались чаще всего</p>
+            </div>
+        </div>               
+        </div>       
     </div>
   </div>
 </div>
