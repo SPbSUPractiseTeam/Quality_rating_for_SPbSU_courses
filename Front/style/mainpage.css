@@ -100,9 +100,13 @@ hr{
   height: 42px;
 }
 .sel1{
-    margin-left: 10px;
+  height: 37px;
+  margin-left: 10px;
+  margin-top: 0px;
 }
 .sel2{
+  margin-top: 10px;
+  height: 37px;
   margin-left: 10px;
 }
 .top{
@@ -186,4 +190,10 @@ input[readonly] {
 }
 .rowRight{
   margin-top: -11px;
+}
+.inputTop{
+  margin-top: 0px;
+}
+.inputTopBtn{
+  height: 37px;
 }
