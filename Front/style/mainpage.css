@@ -197,3 +197,6 @@ input[readonly] {
 .inputTopBtn{
   height: 37px;
 }
+.fileName{
+  padding-top: 5px;   
+}
