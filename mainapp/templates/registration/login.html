@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+{% block content %}
+    {% load add_attr %}
+    <div class="container-fluid">
+        {% if form.errors %}
+            <div class="alert alert-danger" role="alert">
+                Не удается войти. Пожалуйста, проверьте правильность написания логина и пароля.
+            </div>
+        {% endif %}
+        <div class="row align-items-center page-auth">
+            <form class="form-auth" action="" method="post">
+                {% csrf_token %}
+                {% for field in form %}
+                    <div class="form-group">
+                        <label class="label-{{ field.name }}"><b>{{ field.label }}</b></label>
+                        {{ field|add_attr:"class:form-control" }}
+                    </div>
+                {% endfor %}
+                <div class="form-group">
+                    <a href="/register" class="btn btn-secondary btn-sign_up">Зарегистрироваться</a>
+                </div>
+                <div class="form-group">
+                    <button type="submit" class="btn btn-secondary btn-sign_in">Войти</button>
+                </div>
+            </form>
+        </div>
+    </div>
+{% endblock %}

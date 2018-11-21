@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+{% block content %}
+    <div class="container-fluid background">
+        <div class="row">
+            <div class="col-3 row-courses-list">
+                <!--КНОПКИ ВЫБОРА ДОСТУПНЫХ КУРСОВ-->
+                {% for course in courses %}
+                    <button type="button" class="btn btn-default btn-course"
+                            id="course-{{ course.id }}">{{ course.russian_title }}</button>
+                    <hr>
+                {% endfor %}
+                <button type="button" class="btn btn-default btn-add-course">Добавить новый курс</button>
+            </div>
+            <div class="col-9 row-course-detail">
+                <div class="add-course-panel">
+                    <div class="alert alert-success alert-course-upload-success" role="alert">
+                        Курс был успешно загружен в систему
+                    </div>
+                    <div class="alert alert-danger alert-course-upload-failure" role="alert">
+                        К сожалению, не удалось загрузить курс в систему
+                    </div>
+                    <div class="alert alert-warning alert-course-upload-warning" role="alert">
+                        Данный курс уже существует в системе. Пожалуйста, загрузите данный лог-файл через форму в курсе.
+                    </div>
+                </div>
+                <div class="col-9 course-statistic-panel">
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

@@ -1,0 +1,284 @@
+/*Цветовая палитра №3761*/
+/*Шапка*/
+.logo {
+    height: 80px;
+    background-color: black;
+    padding: 10px;
+    color: white;
+}
+
+/*Картинка в шапке*/
+.img-logo {
+    margin-left: 7px;
+    height: 60px;
+}
+
+/*Тело*/
+body {
+    color: black;
+    background-color: white;
+}
+
+br {
+    height: 5px;
+}
+
+/*Страница авторизации*/
+.page-auth {
+    height: 80vh;
+}
+
+/*Ошибки авторизации*/
+.info-error {
+    color: red;
+}
+
+/*Форма авторизации*/
+.form-auth {
+    width: 18%;
+    margin: auto;
+    padding: 40px 40px 30px;
+    background-color: #f5f5f5;
+    border: 1px solid gray;
+    border-radius: 10px;
+}
+
+/*Кнопка входа*/
+.btn-sign_in {
+    margin-top: 20px;
+    background-color: #2b3137;
+    float: right;
+}
+
+/*Кнопка регистрации*/
+.btn-sign_up {
+    margin-top: 20px;
+    background-color: #2b3137;
+    float: left;
+}
+
+/*Кнопка выхода*/
+.btn-logout {
+    background-color: #f5f5f5;
+    border: none;
+    height: 37px;
+    width: 97px;
+    position: absolute;
+    right: 28px;
+    margin-top: 12px;
+    padding: auto;
+}
+
+.link-logout, .link-logout:hover, .link-logout:visited, .link-logout:active {
+    text-decoration: none;
+    color: black;
+}
+
+p {
+    margin-top: 10px;
+    font-size: 18px;
+    line-height: 20px;
+    font-family: Avantgarde, TeX Gyre Adventor, URW Gothic L, sans-serif;
+}
+
+label {
+    font-size: 18px;
+    line-height: 20px;
+    font-family: Avantgarde, TeX Gyre Adventor, URW Gothic L, sans-serif;
+}
+
+/*Кнопка выбора курса*/
+.btn-course {
+    font-size: 18px;
+    line-height: 20px;
+    font-family: Avantgarde, TeX Gyre Adventor, URW Gothic L, sans-serif;
+    width: 100%;
+    text-align: left;
+    padding: 15px;
+    background-color: white;
+    border-radius: 5px;
+}
+
+.btn-course:hover {
+    background: #f5f5f5;
+}
+
+/*Кнопка добавления курсов*/
+.btn-add-course {
+    width: 100%;
+    border: 1px solid;
+    border-radius: 3px;
+    margin-top: 10px;
+    height: 45px;
+    background-color: white;
+}
+
+.btn-add-course:hover {
+    background: #f5f5f5;
+}
+
+/*Колонка выбора курсов*/
+.row-courses-list {
+    background-color: white;
+    margin-top: 20px;
+    padding-left: 5px;
+    padding-right: 5px;
+    border-right: 1px solid gray;
+    color: black;
+}
+
+/*Колонка детальной информации курса*/
+.row-course-detail {
+    margin-top: -11px;
+}
+
+/*Иконка загрузки*/
+.loader {
+    border: 14px solid gray;
+    border-radius: 100%;
+    border-top: 14px solid black;
+    width: 70px;
+    height: 70px;
+    -webkit-animation: spin 1s linear infinite; /* Safari */
+    animation: spin 1s linear infinite;
+}
+
+/*Маленькая иконка загрузки*/
+.loader_little {
+    margin-top: 20px;
+    border: 5px solid gray;
+    border-radius: 100%;
+    border-top: 5px solid black;
+    width: 25px;
+    height: 25px;
+    -webkit-animation: spin 1s linear infinite; /* Safari */
+    animation: spin 1s linear infinite;
+}
+
+/* Safari */
+@-webkit-keyframes spin {
+    0% {
+        -webkit-transform: rotate(0deg);
+    }
+    100% {
+        -webkit-transform: rotate(360deg);
+    }
+}
+
+@keyframes spin {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+/*Кнопка добавления файла*/
+input[name=log]::-webkit-file-upload-button {
+    height: 45px;
+    color: #343a40;
+    background-color: #fff;
+    border: 1px #343a40;
+    margin-top: 10px;
+    margin-right: 115px;
+    display: inline-block;
+    font-weight: 400;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: middle;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    font-size: 1rem;
+    line-height: 1.5;
+    border-radius: .25rem;
+}
+
+/*Кнопка отправки файла*/
+.btn-submit-course {
+    margin-top: 10px;
+    height: 45px;
+    color: green
+}
+
+/*разделители*/
+hr {
+    margin: 2px;
+}
+
+/*Блок статистики*/
+.course-statistic-panel {
+    display: inline;
+}
+
+/*Блок добавления курса*/
+.add-course-panel {
+    margin-top: 20px;
+}
+
+[class^=test-statistic-] {
+    text-indent: 3em;
+}
+
+[class^=test-statistic-] > p {
+    font-size: 14pt;
+}
+
+[class^=test-statistic-] > span {
+    font-size: 14pt;
+}
+
+[class^=attempt-statistic-] {
+    text-indent: 6em;
+}
+
+[class^=attempt-statistic-] > p {
+    font-size: 12pt;
+}
+
+[class^=attempt-statistic-] > span {
+    font-size: 12pt;
+}
+
+[class^=sel-] {
+    height: 37px;
+    margin-left: 10px;
+}
+
+.sel-week {
+    margin-top: 10px;
+}
+
+.top {
+    padding-bottom: 8px;
+}
+
+/* див вывода статистики по видео*/
+.video {
+    margin-top: 15px;
+    margin-left: 10px;
+}
+
+/*диаграмма*/
+.chart {
+    height: 300px;
+    width: 400px;
+    padding-bottom: 10px;
+    border: solid gray 1px;
+}
+
+input[readonly] {
+    background-color: white !important;
+    cursor: text !important;
+}
+
+.form-add-log {
+    margin-left: auto;
+    padding-right: 20px;
+}
+
+.input-log-top {
+    padding-left: 50px;
+}

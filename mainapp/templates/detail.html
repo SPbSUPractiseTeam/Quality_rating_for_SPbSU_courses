@@ -1,0 +1,85 @@
+<!--Cписки дат и недель-->
+<div class="row">
+    <div class="col-3 top">
+        <select class="sel-date">
+            {% for date in dates %}
+                <option value="{{ date.id }}">{{ date }}</option>
+            {% endfor %}
+        </select>
+        <select class="sel-week">
+            {% for week in weeks %}
+                <option value="{{ week.id }}">{{ week }}</option>
+            {% endfor %}
+        </select>
+    </div>
+    {% load add_attr %}
+    <form class="form-add-log" method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        <div class="input-group input-log-top">
+            <div class="form-group">
+                {{ form.log|add_attr:"class:form-control-file" }}
+            </div>
+            <button type="submit" class="btn btn-outline-dark btn-submit-course">Загрузить</button>
+            <div class="loader_little"></div>
+        </div>
+    </form>
+</div>
+<hr>
+<!--Статстика-->
+<div class="stat">
+    <p><b>Cтатистика видеоресурсов</b></p>
+    {% for video in videos %}
+        <div class="video">
+            <p class="link-video">
+                <a href="{{ video.link }}">Видео №{{ video.number }}</a>
+            </p>
+            <details>
+                <summary>Подробнее</summary>
+                <p>Процент просмотренных материалов : <span>{{ video.get_material_viewed }}%</span></p>
+                <p>Процент пользователей, смотревших видео : <span>{{ video.get_users_watched }}%</span></p>
+                <p>Диаграмма пересмотренных моментов</p>
+                <img class="chart" src="{{ video.chart_link }}">
+            </details>
+        </div>
+    {% endfor %}
+    <hr>
+    <p><b>Статистика тестов</b></p>
+    <div class="tests_statistic">
+        {% for test in tests %}
+            <p>
+                <a href="{{ test.link }}">Тест №{{ test.number }}</a>
+            </p>
+            <details>
+                <summary>Статистика по попыткам</summary>
+                <div class="test-statistic-{{ test.number }}">
+                    {% for attempt in test.attempts %}
+                        <p>
+                            <span>Попытка №{{ attempt.number }}</span>
+                        </p>
+                        <details>
+                            <summary>Подробнее</summary>
+                            <div class="attempt-statistic-{{ attempt.number }}">
+                                <strong>
+                                    Процент правильных ответов на вопросы:
+                                </strong>
+                                {% for test_answer in attempt.get_question_gen %}
+                                    <p>{{ test_answer }}</p>
+                                {% endfor %}
+                                <p>Среднее кол-во баллов
+                                    теста:<span>{{ attempt.get_average_grade }} из {{ attempt.get_max_grade }} возможных</span>
+                                </p>
+                                <p>Медиана баллов теста: <span>{{ attempt.get_median }} из {{ attempt.get_max_grade }} возможных</span>
+                                </p>
+                                <p>Количество решений: <span>{{ attempt.number_of_solutions }}</span>
+                                </p>
+                            </div>
+                        </details>
+                    {% endfor %}
+                </div>
+            </details>
+        {% endfor %}
+        <p>
+            <a href="{{ most_viewed_video.link }}">Видео</a>
+            к которому возвращались чаще всего</p>
+    </div>
+</div>

@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+{% block content %}
+    {% load add_attr %}
+    <div class="container-fluid">
+        {% if form.errors %}
+            <div class="alert alert-danger" role="alert">
+                Не удаётся зарегистрироваться. Пожалуйста, проверьте корректность вводимых данных.
+            </div>
+        {% endif %}
+        <div class="row align-items-center page-auth">
+            <form class="form-auth" action="" method="post">
+                {% csrf_token %}
+                {% for field in form %}
+                    <div class="form-group">
+                        <label class="label-{{ field.name }}"><b>{{ field.label }}</b></label>
+                        {% if field.help_text %}
+                            <div class="alert alert-dark" role="alert">
+                                {{ field.help_text }}
+                            </div>
+                        {% endif %}
+                        {{ field|add_attr:"class:form-control" }}
+                    </div>
+                    {% if field.errors %}
+                        <p class="info-error">
+                            {% for error in field.errors %}
+                                <div class="alert alert-danger" role="alert">
+                                    {{ error }}
+                                </div>
+                            {% endfor %}
+                    {% endif %}
+                {% endfor %}
+                <div class="form-group">
+                    <button type="submit" class="btn btn-secondary btn-sign_in">Зарегистрироваться</button>
+                </div>
+            </form>
+        </div>
+    </div>
+{% endblock %}
