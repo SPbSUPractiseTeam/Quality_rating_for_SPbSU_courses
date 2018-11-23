@@ -7,7 +7,16 @@
                 Не удается войти. Пожалуйста, проверьте правильность написания логина и пароля.
             </div>
         {% endif %}
-        <div class="row align-items-center page-auth">
+        <div class="row align-items-center page-auth justify-content-center">
+            {% if user.is_authenticated %}
+             <h2 class="is-already-authenticated">
+                   Вы уже вошли в систему
+             </h2>
+             <br/>
+            <p>
+                Сейчас вы будете перенаправлены на страницу списка курсов
+            </p>
+            {% else %}
             <form class="form-auth" action="" method="post">
                 {% csrf_token %}
                 {% for field in form %}
@@ -23,6 +32,7 @@
                     <button type="submit" class="btn btn-secondary btn-sign_in">Войти</button>
                 </div>
             </form>
+            {%endif%}
         </div>
     </div>
 {% endblock %}

@@ -131,6 +131,11 @@ function csrfSafeMethod(method) {
 }
 
 $(document).ready(function () {
+    if ($(".is-already-authenticated").length){
+        setTimeout(function () {
+           $( location ).attr("href", '/');
+        }, 1000);
+    }
     let h = $(this).height();
     $(".row-courses-list").height(h);
     if (!$.removeCookie('is_reload_success'))
