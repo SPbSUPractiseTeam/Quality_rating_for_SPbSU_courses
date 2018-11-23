@@ -24,7 +24,7 @@ def open_logs(input_file_name, path):  # convert logs into database returns curs
     cursor = database.cursor()
     cursor.executescript("""
         DROP TABLE IF EXISTS load_video;
-        CREATE TABLE load_video 
+        CREATE TABLE load_video
         (
             user_id INT
             ,course_name varchar(300)
@@ -34,7 +34,7 @@ def open_logs(input_file_name, path):  # convert logs into database returns curs
     """)
     cursor.executescript("""
         DROP TABLE IF EXISTS pause_video;
-        CREATE TABLE pause_video 
+        CREATE TABLE pause_video
         (
             user_id INT
             ,course_name varchar(300)
@@ -45,7 +45,7 @@ def open_logs(input_file_name, path):  # convert logs into database returns curs
     """)
     cursor.executescript("""
         DROP TABLE IF EXISTS play_video;
-        CREATE TABLE play_video 
+        CREATE TABLE play_video
         (
             user_id INT
             ,course_name varchar(300)
@@ -56,7 +56,7 @@ def open_logs(input_file_name, path):  # convert logs into database returns curs
     """)
     cursor.executescript("""
         DROP TABLE IF EXISTS stop_video;
-        CREATE TABLE stop_video 
+        CREATE TABLE stop_video
         (
             user_id INT
             ,course_name varchar(300)
@@ -67,7 +67,7 @@ def open_logs(input_file_name, path):  # convert logs into database returns curs
     """)
     cursor.executescript("""
         DROP TABLE IF EXISTS seek_video;
-        CREATE TABLE seek_video 
+        CREATE TABLE seek_video
         (
             user_id INT
             ,course_name varchar(300)
@@ -79,7 +79,7 @@ def open_logs(input_file_name, path):  # convert logs into database returns curs
     """)
     cursor.executescript("""
         DROP TABLE IF EXISTS speed_change_video;
-        CREATE TABLE speed_change_video 
+        CREATE TABLE speed_change_video
         (
             user_id INT
             ,course_name varchar(300)
@@ -92,7 +92,7 @@ def open_logs(input_file_name, path):  # convert logs into database returns curs
     """)
     cursor.executescript("""
         DROP TABLE IF EXISTS hide_transcript;
-        CREATE TABLE hide_transcript 
+        CREATE TABLE hide_transcript
         (
             user_id INT
             ,course_name varchar(300)
@@ -103,7 +103,7 @@ def open_logs(input_file_name, path):  # convert logs into database returns curs
     """)
     cursor.executescript("""
         DROP TABLE IF EXISTS show_transcript;
-        CREATE TABLE show_transcript 
+        CREATE TABLE show_transcript
         (
             user_id INT
             ,course_name varchar(300)
@@ -114,7 +114,7 @@ def open_logs(input_file_name, path):  # convert logs into database returns curs
     """)
     cursor.executescript("""
         DROP TABLE IF EXISTS video_hide_cc_menu;
-        CREATE TABLE video_hide_cc_menu 
+        CREATE TABLE video_hide_cc_menu
         (
             user_id INT
             ,course_name varchar(300)
@@ -124,7 +124,7 @@ def open_logs(input_file_name, path):  # convert logs into database returns curs
     """)
     cursor.executescript("""
         DROP TABLE IF EXISTS video_show_cc_menu;
-        CREATE TABLE video_show_cc_menu 
+        CREATE TABLE video_show_cc_menu
         (
             user_id INT
             ,course_name varchar(300)
@@ -134,7 +134,7 @@ def open_logs(input_file_name, path):  # convert logs into database returns curs
     """)
     cursor.executescript("""
         DROP TABLE IF EXISTS problem_check;
-        CREATE TABLE problem_check 
+        CREATE TABLE problem_check
         (
             user_id INT
             ,course_name varchar(300)
@@ -149,7 +149,7 @@ def open_logs(input_file_name, path):  # convert logs into database returns curs
     """)
     cursor.executescript("""
         DROP TABLE IF EXISTS problem_show;
-        CREATE TABLE problem_show 
+        CREATE TABLE problem_show
         (
             user_id INT
             ,course_name varchar(300)
@@ -159,7 +159,7 @@ def open_logs(input_file_name, path):  # convert logs into database returns curs
     """)
     cursor.executescript("""
         DROP TABLE IF EXISTS problem_hint;
-        CREATE TABLE problem_hint 
+        CREATE TABLE problem_hint
         (
             user_id INT
             ,course_name varchar(300)
@@ -170,7 +170,7 @@ def open_logs(input_file_name, path):  # convert logs into database returns curs
     """)
     cursor.executescript("""
         DROP TABLE IF EXISTS book_gotopage;
-        CREATE TABLE book_gotopage 
+        CREATE TABLE book_gotopage
         (
             user_id INT
             ,course_name varchar(300)
@@ -182,7 +182,7 @@ def open_logs(input_file_name, path):  # convert logs into database returns curs
     """)
     cursor.executescript("""
         DROP TABLE IF EXISTS book_prevpage;
-        CREATE TABLE book_prevpage 
+        CREATE TABLE book_prevpage
         (
             user_id INT
             ,course_name varchar(300)
@@ -193,7 +193,7 @@ def open_logs(input_file_name, path):  # convert logs into database returns curs
     """)
     cursor.executescript("""
         DROP TABLE IF EXISTS book_nextpage;
-        CREATE TABLE book_nextpage 
+        CREATE TABLE book_nextpage
         (
             user_id INT
             ,course_name varchar(300)
@@ -204,7 +204,7 @@ def open_logs(input_file_name, path):  # convert logs into database returns curs
     """)
     cursor.executescript("""
         DROP TABLE IF EXISTS book_thumbnail_navigated;
-        CREATE TABLE book_thumbnail_navigated 
+        CREATE TABLE book_thumbnail_navigated
         (
             user_id INT
             ,course_name varchar(300)
@@ -215,7 +215,7 @@ def open_logs(input_file_name, path):  # convert logs into database returns curs
     """)
     cursor.executescript("""
         DROP TABLE IF EXISTS book_chapter_navigated;
-        CREATE TABLE book_chapter_navigated 
+        CREATE TABLE book_chapter_navigated
         (
             user_id INT
             ,course_name varchar(300)
@@ -227,7 +227,7 @@ def open_logs(input_file_name, path):  # convert logs into database returns curs
     """)
     cursor.executescript("""
         DROP TABLE IF EXISTS book_page_navigated;
-        CREATE TABLE book_page_navigated 
+        CREATE TABLE book_page_navigated
         (
             user_id INT
             ,course_name varchar(300)
@@ -239,7 +239,7 @@ def open_logs(input_file_name, path):  # convert logs into database returns curs
     """)
     cursor.executescript("""
         DROP TABLE IF EXISTS book_page_scrolled;
-        CREATE TABLE book_page_scrolled 
+        CREATE TABLE book_page_scrolled
         (
             user_id INT
             ,course_name varchar(300)
@@ -252,7 +252,7 @@ def open_logs(input_file_name, path):  # convert logs into database returns curs
     """)
     cursor.executescript("""
         DROP TABLE IF EXISTS book_search;
-        CREATE TABLE book_search 
+        CREATE TABLE book_search
         (
             user_id INT
             ,course_name varchar(300)
@@ -266,7 +266,7 @@ def open_logs(input_file_name, path):  # convert logs into database returns curs
     """)
     cursor.executescript("""
         DROP TABLE IF EXISTS page_close;
-        CREATE TABLE page_close 
+        CREATE TABLE page_close
         (
             user_id INT
             ,course_name varchar(300)
@@ -276,7 +276,7 @@ def open_logs(input_file_name, path):  # convert logs into database returns curs
     """)
     cursor.executescript("""
         DROP TABLE IF EXISTS seq_goto;
-        CREATE TABLE seq_goto 
+        CREATE TABLE seq_goto
         (
             user_id INT
             ,course_name varchar(300)
@@ -379,8 +379,9 @@ def open_logs(input_file_name, path):  # convert logs into database returns curs
             problem_id = ""
 
             if event_type == "edx.problem.hint.demandhint_displayed":
-                extra_info = str(event["hint_index"])
+                extra_info = "," + str(event["hint_index"])
                 problem_id = event["module_id"]
+                event_type = "problem_hint"
 
             elif event_type == "edx.problem.hint.feedback_displayed":
                 extra_info = skip_str
@@ -443,8 +444,6 @@ def open_logs(input_file_name, path):  # convert logs into database returns curs
             if extra_info != skip_str:
                 extra_info += "\n"
 
-                # todo: fix
-                # only here don't change  page... WARNING!!!            need to fix
                 write_to_db(cursor, problem_id, event_type, extra_info)
         # elif data["event_type"] in special_exam_events:
         #    event_type = data["event_type"]
@@ -511,9 +510,9 @@ def open_logs(input_file_name, path):  # convert logs into database returns curs
                 event_type = "book_search"
                 extra_info = ", '" + event["chapter"] + "', " + str(event["page"]) + ", '" + event["query"] + "'"
                 if event["status"] == "not found":
-                    extra_info += ", False"
+                    extra_info += ", 'false'"
                 else:
-                    extra_info += ", True"
+                    extra_info += ", 'true'"
 
             if extra_info != skip_str:
                 extra_info += "\n"

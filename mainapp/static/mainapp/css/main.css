@@ -179,7 +179,8 @@ input[name=log]::-webkit-file-upload-button {
     height: 45px;
     color: #343a40;
     background-color: #fff;
-    border: 1px #343a40;
+    border-color: #343a40;
+    border-width:1px;
     margin-top: 10px;
     margin-right: 115px;
     display: inline-block;

@@ -7,20 +7,19 @@ import matplotlib.pyplot as plt
 import numpy as np
 from mainapp.models import Course, LoadDate, Week, Test, Attempt, Video
 
-
 def get_split_path(path):
-    disk_and_path = path.split("//")
+    disk_and_path = path.split(os.sep + os.sep)
     split_path = []
     if len(disk_and_path) > 1:
-        split_path.append(disk_and_path[0] + "//")
-        split_path.extend(disk_and_path[1].split("/"))
+        split_path.append(disk_and_path[0] + os.sep)
+        split_path.extend(disk_and_path[1].split(os.sep))
     else:
-        split_path.extend(disk_and_path[0].split("/"))
+        split_path.extend(disk_and_path[0].split(os.sep))
     return split_path
 
 
 def save_file(file, path, user, title):
-    dirs = '/'.join(path.split('\\')[:-1])
+    dirs = os.sep.join(path.split(os.sep)[:-1])
     split_path = get_split_path(dirs)
     save_path = []
     charts_save_path = []
@@ -33,18 +32,18 @@ def save_file(file, path, user, title):
             save_path.append(path_dir)
     if not os.path.exists(dirs):
         os.makedirs(dirs)
-    path = '\\'.join([dirs, file.name])
+    path = os.sep.join([dirs, file.name])
     with open(path, "wb+") as destination:
         for chunk in file.chunks():
             destination.write(chunk)
-    save_path = '/'.join(save_path)
-    charts_save_path = '/'.join(charts_save_path)
+    save_path = os.sep.join(save_path)
+    charts_save_path = os.sep.join(charts_save_path)
     if not os.path.exists(save_path):
         os.makedirs(save_path)
     if not os.path.exists(charts_save_path):
         os.makedirs(charts_save_path)
     json_files = make_analytic_json(file.name, dirs, save_path)
-    # TODO: remove log file
+    os.remove(path)
     if json_files is not None:
         parse_json_to_database(*json_files, user, title, charts_save_path)
 
@@ -108,7 +107,7 @@ def make_img(video_info, video_hash_str_id, save_path):
     plt.plot(np.linspace(0, video_info['length'], video_info['intervals_number']), video_info['review_intervals'])
     plt.savefig(save_path, dpi=600)
     plt.close()
-    return save_path
+    return os.sep.join(save_path.split(os.sep)[5:])
 
 
 def make_analytic_json(file_name, path_to_log, save_path):

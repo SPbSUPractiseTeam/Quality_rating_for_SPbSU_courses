@@ -10,9 +10,8 @@ from .forms import UploadFileForm
 from .support_scripts import save_file
 from django.http import QueryDict
 import os
-
-BASE_DIR = ""
-
+from unidecode import unidecode
+from django.conf import settings
 
 class LogoutView(View):
     def get(self, request):
@@ -25,7 +24,7 @@ def upload_file(request):
         form = UploadFileForm(request.POST, request.FILES)
         if form.is_valid():
             save_file(request.FILES['log'],
-                      os.path.join(BASE_DIR, 'profiles', request.user.username, "logs", request.POST['title'],
+                      os.path.join(settings.MEDIA_ROOT, request.user.username, "logs", unidecode(request.POST['title']),
                                    request.FILES['log'].name), request.user, request.POST['title'])
     form = UploadFileForm()
     return render(request, 'upload.html', {'form': form})
@@ -66,7 +65,7 @@ def course_detail(request):
         form = UploadFileForm(post, request.FILES)
         if form.is_valid():
             save_file(request.FILES['log'],
-                      os.path.join(BASE_DIR, 'profiles', request.user.username, "logs", request.POST['title'],
+                      os.path.join(settings.MEDIA_ROOT, request.user.username, "logs", unidecode(request.POST['title']),
                                    request.FILES['log'].name), request.user, request.POST['title'])
     else:
         form = UploadFileForm()

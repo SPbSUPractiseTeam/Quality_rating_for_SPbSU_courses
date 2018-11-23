@@ -22,9 +22,9 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = '-!gt0k387$25=ly-gzn7+z1%46kr&og88(c--#skgt+89auy^l'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['rikevoltz.pythonanywhere.com']
 
 # Application definition
 
@@ -113,8 +113,10 @@ USE_TZ = True
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/2.1/howto/static-files/
-
-STATIC_ROOT = os.path.join(BASE_DIR, 'mainapp\\static')
+TEMPLATE_CONTEXT_PROCESSOR = [
+    'django.core.context_processors.media'
+]
+MEDIA_ROOT = os.path.join(BASE_DIR, 'mainapp','profiles')
+MEDIA_URL = '/profiles/'
+STATIC_ROOT = os.path.join(BASE_DIR, 'mainapp','static')
 STATIC_URL = '/static/'
-MEDIA_ROOT = os.path.join(BASE_DIR, 'profiles')
-MEDIA_URL = 'profiles/'

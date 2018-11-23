@@ -1,0 +1,6 @@
+*__pycache__
+*.sqlite*
+*venv*
+*.pyc*
+mainapp/profiles/*
+mainapp/static/admin/*
