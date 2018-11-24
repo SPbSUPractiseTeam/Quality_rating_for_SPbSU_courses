@@ -43,6 +43,15 @@ br {
     border-radius: 10px;
 }
 
+/*Форма регистрации*/
+.form-register {
+    margin: auto;
+    padding: 40px 40px 30px;
+    background-color: #f5f5f5;
+    border: 1px solid gray;
+    border-radius: 10px;
+}
+
 /*Кнопка входа*/
 .btn-sign_in {
     margin-top: 20px;

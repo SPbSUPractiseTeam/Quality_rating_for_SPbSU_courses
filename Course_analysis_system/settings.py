@@ -35,7 +35,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'mainapp'
+    'mainapp',
+    'snowpenguin.django.recaptcha2'
 ]
 
 MIDDLEWARE = [
@@ -120,3 +121,12 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'mainapp','profiles')
 MEDIA_URL = '/profiles/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'mainapp','static')
 STATIC_URL = '/static/'
+
+RECAPTCHA_PRIVATE_KEY = '6LdnsHwUAAAAAN7pWtdpvf0xN2qRjpJq7wFUVaEC'
+RECAPTCHA_PUBLIC_KEY = '6LdnsHwUAAAAAIMp3862pDR22__9BW8NdGFLXvwk'
+
+EMAIL_HOST = "smtp.gmail.com"
+EMAIL_HOST_USER = "rikevoltzpa@gmail.com"
+EMAIL_HOST_PASSWORD = 'mfvfczlyooubtjlc'
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True

@@ -2,7 +2,7 @@ $("button[id|='course']").on("click", function () {
     $(".course-statistic-panel").show();
     $(".add-course-panel").hide();
     $(this).addClass('active');
-    let id = $(this).attr('id').split('-')[1];
+    var id = $(this).attr('id').split('-')[1];
     parameters_changed({course_id: id});
 });
 
@@ -59,12 +59,12 @@ $(".btn-add-course").on("click", function () {
 });
 
 $(document).on('change', '.sel-week', function () {
-    let id = $(this).val();
+    var id = $(this).val();
     parameters_changed({week_id: id});
 });
 
 $(document).on('change', '.sel-date', function () {
-    let id = $(this).val();
+    var id = $(this).val();
     parameters_changed({date_id: id});
 });
 
@@ -92,7 +92,7 @@ function parameters_changed(options) {
                 if (options.week_id !== -1)
                     $('.sel-week').val(options.week_id);
                 $("button[id='[course-" + options.course_id + "]'").addClass('active');
-                let h = $('.row-course-detail').height();
+                var h = $('.row-course-detail').height();
                 $(".row-courses-list").height(h);
                 $('.form-add-log').on('submit', function (event) {
                     event.preventDefault();
@@ -136,7 +136,7 @@ $(document).ready(function () {
            $( location ).attr("href", '/');
         }, 1000);
     }
-    let h = $(this).height();
+    var h = $(this).height();
     $(".row-courses-list").height(h);
     if (!$.removeCookie('is_reload_success'))
         $(".alert-course-upload-success").hide();
@@ -161,7 +161,7 @@ $(document).ready(function () {
     }
     $.ajaxSetup({
         beforeSend: function (xhr, settings) {
-            let csrf_token = $.cookie('csrftoken');
+            var csrf_token = $.cookie('csrftoken');
             if (!csrfSafeMethod(settings.type) && !this.crossDomain) {
                 xhr.setRequestHeader("X-CSRFToken", csrf_token);
             }
