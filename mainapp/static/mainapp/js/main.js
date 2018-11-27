@@ -134,7 +134,7 @@ $(document).ready(function () {
     if ($(".is-already-authenticated").length){
         setTimeout(function () {
            $( location ).attr("href", '/');
-        }, 1000);
+        }, 100000);
     }
     var h = $(this).height();
     $(".row-courses-list").height(h);
