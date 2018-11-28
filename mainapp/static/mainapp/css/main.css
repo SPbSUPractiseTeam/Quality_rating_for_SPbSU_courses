@@ -32,10 +32,7 @@ br {
 
 /*Форма регистрации*/
 .form-register {
-    margin: auto;
-    padding: 40px 40px 30px;
     background-color: #f5f5f5;
-    border: 1px solid gray;
     border-radius: 10px;
 }
 
@@ -228,6 +225,11 @@ hr {
 
 /* див вывода статистики по видео*/
 .video {
+}
+
+.form-group > .alert {
+    display: inherit;
+    font-size: 14px;
 }
 
 .alert {
