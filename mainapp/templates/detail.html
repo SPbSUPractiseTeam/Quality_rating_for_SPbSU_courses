@@ -1,14 +1,14 @@
-<!--Cписки дат и недель-->
+<!--Списки дат и недель-->
 <div class="row">
     <div class="col-3 top">
-        <select class="sel-date">
-            {% for date in dates %}
-                <option value="{{ date.id }}">{{ date }}</option>
+        <select class="sel-log">
+            {% for log in logs %}
+                <option value="{{ log.id }}">{{ log }}</option>
             {% endfor %}
         </select>
-        <select class="sel-week">
-            {% for week in weeks %}
-                <option value="{{ week.id }}">{{ week }}</option>
+        <select class="sel-module">
+            {% for module in modules %}
+                <option value="{{ module.id }}">{{ module }}</option>
             {% endfor %}
         </select>
     </div>
@@ -25,61 +25,71 @@
     </form>
 </div>
 <hr>
-<!--Статстика-->
-<div class="stat">
-    <p><b>Cтатистика видеоресурсов</b></p>
-    {% for video in videos %}
-        <div class="video">
-            <p class="link-video">
-                <a href="{{ video.link }}">Видео №{{ video.number }}</a>
-            </p>
-            <details>
-                <summary>Подробнее</summary>
-                <p>Процент просмотренных материалов : <span>{{ video.get_material_viewed }}%</span></p>
-                <p>Процент пользователей, смотревших видео : <span>{{ video.get_users_watched }}%</span></p>
-                <p>Диаграмма пересмотренных моментов</p>
-                <img class="chart" src="{{ video.chart_link }}">
-            </details>
-        </div>
-    {% endfor %}
-    <hr>
-    <p><b>Статистика тестов</b></p>
-    <div class="tests_statistic">
-        {% for test in tests %}
-            <p>
-                <a href="{{ test.link }}">Тест №{{ test.number }}</a>
-            </p>
-            <details>
-                <summary>Статистика по попыткам</summary>
-                <div class="test-statistic-{{ test.number }}">
-                    {% for attempt in test.attempts %}
-                        <p>
-                            <span>Попытка №{{ attempt.number }}</span>
-                        </p>
-                        <details>
-                            <summary>Подробнее</summary>
-                            <div class="attempt-statistic-{{ attempt.number }}">
-                                <strong>
-                                    Процент правильных ответов на вопросы:
-                                </strong>
-                                {% for test_answer in attempt.get_question_gen %}
-                                    <p>{{ test_answer }}</p>
-                                {% endfor %}
-                                <p>Среднее кол-во баллов
-                                    теста:<span>{{ attempt.get_average_grade }} из {{ attempt.get_max_grade }} возможных</span>
+<!--Статистика-->
+<div>
+    <p><b>Статистика лекций</b></p>
+    {% for lesson in lessons %}
+        <p>
+            <a href="{{ lesson.link }}">Лекция №{{ lesson.number }}</a>
+        </p>
+        <details>
+            <summary class="lesson-statistic">Подробная статистика лекции</summary>
+            {% if lesson.videos_count > 0 %}
+                <details>
+                    <summary class="videos-statistic">Статистика по лекционным видео</summary>
+                    {% for video in lesson.videos %}
+                        <div class="video">
+                            <p>
+                                Видео №{{ video.number }}
+                            </p>
+                            <details>
+                                <summary>Подробнее</summary>
+                                <p>Процент просмотренных материалов : <span>{{ video.get_material_viewed }}%</span>
                                 </p>
-                                <p>Медиана баллов теста: <span>{{ attempt.get_median }} из {{ attempt.get_max_grade }} возможных</span>
+                                <p>Процент пользователей, смотревших видео :
+                                    <span>{{ video.get_users_watched }}%</span>
                                 </p>
-                                <p>Количество решений: <span>{{ attempt.number_of_solutions }}</span>
-                                </p>
-                            </div>
+                                <p>Диаграмма пересмотренных моментов</p>
+                                <img class="chart" src="{{ video.chart_link }}">
+                            </details>
+                        </div>
+                    {% endfor %}
+                    <p><a href="{{ most_viewed_video.link }}">Видео</a> к которому возвращались чаще всего</p>
+                </details>
+            {% endif %}
+            {% if lesson.tests_count > 0 %}
+                <details class="tests-statistic">
+                    <summary>Статистика по лекционным тестам</summary>
+                    {% for test in lesson.tests %}
+                        <details class="test-attempts-statistic-{{ test.number }}">
+                            <summary>
+                                Тест№{{ test.number }}
+                            </summary>
+                            {% for attempt in test.attempts %}
+                                <details class="attempt-statistic-{{ attempt.number }}">
+                                    <summary>
+                                        Попытка №{{ attempt.number }}
+                                    </summary>
+                                    <strong>
+                                        Процент правильных ответов на вопросы:
+                                    </strong>
+                                    {% for test_answer in attempt.get_question_list %}
+                                        <p>{{ test_answer }}</p>
+                                    {% endfor %}
+                                    <p>Среднее кол-во баллов
+                                        теста:<span>{{ attempt.get_average_grade }} из {{ attempt.get_max_grade }} возможных</span>
+                                    </p>
+                                    <p>Медиана баллов теста:
+                                        <span>{{ attempt.get_median }} из {{ attempt.get_max_grade }} возможных</span>
+                                    </p>
+                                    <p>Количество решений: <span>{{ attempt.number_of_solutions }}</span>
+                                    </p>
+                                </details>
+                            {% endfor %}
                         </details>
                     {% endfor %}
-                </div>
-            </details>
-        {% endfor %}
-        <p>
-            <a href="{{ most_viewed_video.link }}">Видео</a>
-            к которому возвращались чаще всего</p>
-    </div>
+                </details>
+            {% endif %}
+        </details>
+    {% endfor %}
 </div>

@@ -5,12 +5,12 @@
     background-color: black;
     color: white;
 }
-.img-logo{
+
+.img-logo {
     height: 6.5vh;
 }
 
-
-.page{
+.page {
     min-height: 84vh;
     max-height: 91.5vh;
 }
@@ -150,7 +150,7 @@ input[name=log]::-webkit-file-upload-button {
     color: #343a40;
     background-color: #fff;
     border-color: #343a40;
-    border-width:1px;
+    border-width: 1px;
     margin-top: 10px;
     margin-right: 115px;
     display: inline-block;
@@ -189,28 +189,28 @@ hr {
     margin-top: 20px;
 }
 
-[class^=test-statistic-] {
-    text-indent: 3em;
+.lesson-statistic {
+    font-size: 22px;
 }
 
-[class^=test-statistic-] > p {
-    font-size: 14pt;
+.tests-statistic, .videos-statistic {
+    text-indent: 2em;
+    font-size: 21px;
 }
 
-[class^=test-statistic-] > span {
-    font-size: 14pt;
+[class^=test-attempts-statistic-] {
+    text-indent: 4em;
+    font-size: 20px;
+}
+
+[class^=attempt-statistic-] > summary {
+    text-indent: 6em;
+    font-size: 19px;
 }
 
 [class^=attempt-statistic-] {
-    text-indent: 6em;
-}
-
-[class^=attempt-statistic-] > p {
-    font-size: 12pt;
-}
-
-[class^=attempt-statistic-] > span {
-    font-size: 12pt;
+    text-indent: 8em;
+    font-size: 18px;
 }
 
 [class^=sel-] {
@@ -218,7 +218,7 @@ hr {
     margin-left: 10px;
 }
 
-.sel-week {
+.sel-module {
     margin-top: 10px;
 }
 
@@ -228,8 +228,6 @@ hr {
 
 /* див вывода статистики по видео*/
 .video {
-    margin-top: 15px;
-    margin-left: 10px;
 }
 
 /*диаграмма*/

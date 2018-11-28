@@ -58,39 +58,39 @@ $(".btn-add-course").on("click", function () {
     );
 });
 
-$(document).on('change', '.sel-week', function () {
+$(document).on('change', '.sel-module', function () {
     var id = $(this).val();
-    parameters_changed({week_id: id});
+    parameters_changed({module_id: id});
 });
 
-$(document).on('change', '.sel-date', function () {
+$(document).on('change', '.sel-log', function () {
     var id = $(this).val();
-    parameters_changed({date_id: id});
+    parameters_changed({log_id: id});
 });
 
 function parameters_changed(options) {
     if (options.course_id === undefined) {
         options.course_id = $(".btn-course.active").attr('id').split('-')[1];
     }
-    if (options.date_id === undefined)
-        options.date_id = -1;
-    if (options.week_id === undefined)
-        options.week_id = -1;
+    if (options.log_id === undefined)
+        options.log_id = -1;
+    if (options.module_id === undefined)
+        options.module_id = -1;
     $.ajax({
             type: "POST",
             url: "/detail",
             data: {
                 course_id: options.course_id,
-                date_id: options.date_id,
-                week_id: options.week_id,
+                log_id: options.log_id,
+                module_id: options.module_id,
             },
             success: function (data) {
                 $('.course-statistic-panel').html(data);
                 $(".loader_little").hide();
-                if (options.date_id !== -1)
-                    $('.sel-date').val(options.date_id);
-                if (options.week_id !== -1)
-                    $('.sel-week').val(options.week_id);
+                if (options.log_id !== -1)
+                    $('.sel-log').val(options.log_id);
+                if (options.module_id !== -1)
+                    $('.sel-module').val(options.module_id);
                 $("button[id='[course-" + options.course_id + "]'").addClass('active');
                 var h = $('.row-course-detail').height();
                 $(".row-courses-list").height(h);
@@ -100,8 +100,8 @@ function parameters_changed(options) {
                     form_data.append('log', $('.form-control-file').prop('files')[0]);
                     form_data.append('title', $('.btn-course.active').text());
                     form_data.append('course_id', options.course_id);
-                    form_data.append('date_id', options.date_id);
-                    form_data.append('week_id', options.week_id);
+                    form_data.append('log_id', options.log_id);
+                    form_data.append('module_id', options.module_id);
                     $(".btn-submit-course").hide();
                     $(".loader_little").show();
                     $.ajax({

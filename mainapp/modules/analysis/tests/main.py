@@ -1,18 +1,16 @@
 import pandas as pd
+import numpy as np
 
-from .content import test_questions_analisys as qa
-from .content import tests_analisys as ta
+from .content import test_questions_analysis as qa
+from .content import tests_analysis as ta
 from .output import output as out
 
 
-def execute(cursor, course_name, path):
+def execute(cursor, _course_name, _path):
     # and questions NOT LIKE '__' means that we needn't questions like {}
     # and attempts < 4 means that we use only three first attempts, other attempts are not interesting
     request = """
-        select 
-        course_name, problem_id,
-        attempts, questions,
-        page, grade, max_grade
+        select course_name, page, problem_type, problem_id, attempts, questions, grade, max_grade
         from problem_check
         where questions NOT LIKE '__'
         and attempts < 4
@@ -20,50 +18,41 @@ def execute(cursor, course_name, path):
     cursor.execute(request)
     data = cursor.fetchall()
 
-    columns_names = []
-    for i in cursor.description[:]:
-        columns_names.append(i[0])
+    if data:
+        columns_names = []
+        for i in cursor.description[:]:
+            columns_names.append(i[0])
 
-    df = pd.DataFrame(data=data, columns=columns_names)
+        df = pd.DataFrame(data=data, columns=columns_names)
 
-    # changing refer link and cut problem_id
-    df['page'] = df['page'].apply(lambda x: x.split('/handler')[0])
-    df['problem_id'] = df['problem_id'].apply(lambda x: x.split('@')[-1])
+        # changing refer link and cut problem_id
+        df['page'] = df['page'].apply(lambda x: x.split('?child')[0])
+        df['problem_id'] = df['problem_id'].apply(lambda x: x.split('@')[-1])
 
-    # calculating: average grade, median of grade, number of answers for each test
-    avg = ta.calculate_tests(df)
+        tmpdf = df.groupby(['course_name', 'page', 'problem_type', 'problem_id', 'attempts'])['max_grade'].agg([np.max])
+        tmpdf = tmpdf.rename(columns={'amax': 'max_grade'})
 
-    # counting percent of right answers on each question
-    # parsing questions string in two columns: question and result
-    list_for_questions = pd.DataFrame(
-        columns=('course_name', 'problem_id', 'page', 'question', 'attempts', 'result', 'max_grade'))
+        # calculating: average grade, median of grade, number of answers for each test
+        avg = ta.calculate_tests(df)
 
-    for row_counter in range(df.shape[0]):
-        current_attempt = df.attempts[row_counter]
-        current_page = df.page[row_counter]
-        current_course = df.course_name[row_counter]
-        current_grade = df.max_grade[row_counter]
-        current_problem = df.problem_id[row_counter]
-        row = (df.questions[row_counter][1:-1]).split(',')
-        for cell_row in row:
-            temp_row = cell_row.split(':')
-            if temp_row[1] == 'True':
-                list_for_questions = list_for_questions.append(
-                    {'course_name': current_course, 'problem_id': current_problem, 'page': current_page,
-                     'question': temp_row[0], 'attempts': current_attempt, 'result': 1, 'max_grade': current_grade},
-                    ignore_index=True)
-            else:
-                list_for_questions = list_for_questions.append(
-                    {'course_name': current_course, 'problem_id': current_problem, 'page': current_page,
-                     'question': temp_row[0], 'attempts': current_attempt, 'result': 0, 'max_grade': current_grade},
-                    ignore_index=True)
+        # counting percent of right answers on each question
+        # parsing questions string in two columns: question and result
 
-    list_for_questions['question'] = list_for_questions['question'].map(str.strip)  # deleting spaces
-    list_for_questions['question'] = list_for_questions['question'].apply(
-        lambda x: ('"' + x.split('_')[-2] + '_' + x.split('_')[-1]))
+        new_cols = df['questions'].str[1:-1]
+        new_cols = new_cols.str.split(',').apply(pd.Series, 1).stack()
+        new_cols = new_cols.apply(lambda x: pd.Series(x.split(':')[-1]))
+        new_cols = new_cols.reset_index(level=1)
+        new_cols = new_cols.rename(columns={'level_1': 'question', 0: 'result'})
+        new_cols['question'] = new_cols['question'].apply(lambda x: pd.Series(x + 1))
+        new_cols['result'] = new_cols['result'].map({'True': 1, 'False': 0})
+        list_for_questions = pd.DataFrame(df, columns=['course_name', 'page', 'problem_type', 'problem_id', 'attempts'])
+        list_for_questions = list_for_questions.join(new_cols)
 
-    perc = qa.calculate_questions(list_for_questions)
+        perc = qa.calculate_questions(list_for_questions)
 
-    # merge results of analysis (average and percentage) into one table
-    res = pd.merge(avg, perc, on=['course_name', 'problem_id', 'page', 'attempts', 'max_grade'], how='outer')
-    return out.output(res, course_name, path)
+        # merge results of analysis (average and percentade) into one table
+        res = pd.merge(avg, perc, on=['course_name', 'page', 'problem_type', 'problem_id', 'attempts'], how='outer')
+        res = pd.merge(res, tmpdf, on=['course_name', 'page', 'problem_type', 'problem_id', 'attempts'], how='outer')
+    else:
+        res = ""
+    return out.output(res, _course_name, _path)

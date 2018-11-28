@@ -145,6 +145,7 @@ def open_logs(input_file_name, path):  # convert logs into database returns curs
             ,max_grade real
             ,attempts int
             ,problem_id varchar(300)
+            ,problem_type varchar(300)
         )
     """)
     cursor.executescript("""
@@ -393,9 +394,11 @@ def open_logs(input_file_name, path):  # convert logs into database returns curs
                         extra_info += '"' + key + '"' + ":" + str(event["submission"][key]["correct"]) + ", "
                     extra_info = extra_info[0:-2]
                     extra_info += "}', " + str(event["grade"]) + ", " + str(event["max_grade"]) + ", " + str(
-                        event["attempts"]) + ", '" + str(event["problem_id"]) + "'"
+                        event["attempts"]) + ", '" + str(event["problem_id"]) + "','" + str(
+                        data["context"]["module"]["display_name"]) + "'"
                     # problem_id = event["problem_id"]
-                    problem_id = "https://courses.openedu.ru" + data["context"]["path"]
+                    # problem_id = "https://courses.openedu.ru" + data["context"]["path"]
+                    problem_id = data["referer"]
 
                 else:
                     extra_info = skip_str

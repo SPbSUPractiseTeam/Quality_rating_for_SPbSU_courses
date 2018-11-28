@@ -5,7 +5,8 @@ from mainapp.modules.analysis import analysis
 from mainapp.modules.preprocessing import log_parser
 import matplotlib.pyplot as plt
 import numpy as np
-from mainapp.models import Course, LoadDate, Week, Test, Attempt, Video
+from mainapp.models import Course, Log, Module, Lesson, Video, Test, Attempt
+
 
 def get_split_path(path):
     disk_and_path = path.split(os.sep + os.sep)
@@ -53,53 +54,98 @@ def parse_json_to_database(video_json_file_path, tests_json_file_path, user, rus
         video_dict = json.load(video_json_file)
     with open(tests_json_file_path, "r") as tests_json_file:
         tests_dict = json.load(tests_json_file)
-        course = Course.objects.get_or_create(user=user, title=list(tests_dict.keys())[0], russian_title=russian_title)[
-            0]
-    date = LoadDate.objects.create(course=course, date=datetime.datetime.now())
-    parse_tests_json(course, tests_dict)
-    parse_video_json(video_dict, date, charts_save_path)
+        course = Course.objects.get_or_create(user=user,
+                                              title=list(tests_dict.keys())[0],
+                                              russian_title=russian_title)[0]
+    log = Log.objects.create(course=course,
+                             load_date=datetime.datetime.now())
+    parse_tests_json(tests_dict, log)
+    parse_video_json(video_dict, log, charts_save_path)
 
 
-def parse_tests_json(course, tests_dict):
-    for problem_id, test_item in tests_dict[course.title]['tests'].items():
-        test = Test.objects.get_or_create(hash_str_id=problem_id, course=course,
-                                          defaults={'number': test_item['number'], 'link': test_item['page']})[0]
-        for attempt_item in test_item['attempts']:
-            Attempt.objects.get_or_create(number=attempt_item["attempt"], test=test,
-                                          defaults={'average_grade': attempt_item['mean'],
-                                                    'median': attempt_item['median'],
-                                                    'questions': attempt_item['questions'],
-                                                    'number_of_solutions': attempt_item[
-                                                        'number_of_solutions'],
-                                                    'max_grade': attempt_item['max_grade']})
+def parse_tests_json(tests_dict, log):
+    modules_idx = 1
+    for module_item in tests_dict['tests']:
+        module = Module.objects.create(hash_str_id=module_item['section'],
+                                       log=log,
+                                       number=modules_idx)
+        modules_idx += 1
+        lessons_idx = 1
+        for lesson_item in module_item['subsections']:
+            lesson = Lesson.objects.get_or_create(hash_str_id=lesson_item['subsection'],
+                                                  module=module,
+                                                  link=lesson_item['page'],
+                                                  defaults={'number': lessons_idx})
+            if lesson[1]:
+                lessons_idx += 1
+            lesson = lesson[0]
+            problem_type = lesson_item['problem_type']
+            tests_idx = Test.objects.filter(lesson=lesson).count() + 1
+            for test_item in lesson_item['one_type_problems']:
+                test = Test.objects.get_or_create(hash_str_id=test_item['problem_id'],
+                                                  lesson=lesson,
+                                                  type=problem_type,
+                                                  defaults={'number': tests_idx})
+                if test[1]:
+                    tests_idx += 1
+                test = test[0]
+                for attempt_item in test_item['attempts']:
+                    questions = list()
+                    for question in attempt_item['questions']:
+                        questions.append("{}){}".format(question['question'], question['percent_of_right_answers']))
+                    questions = ','.join(questions)
+                    Attempt.objects.get_or_create(number=attempt_item["attempt"],
+                                                  test=test,
+                                                  defaults={
+                                                      'average_grade': attempt_item['mean'],
+                                                      'median': attempt_item['median'],
+                                                      'questions': questions,
+                                                      'number_of_solutions': attempt_item['number_of_solutions'],
+                                                      'max_grade': attempt_item['max_grade']})
 
 
-def parse_video_json(video_dict, date, charts_save_path):
-    idx_week = 0
-    for week_item in video_dict['sections']:
-        most_viewed_video_hash_str = ""
+def parse_video_json(video_dict, log, charts_save_path):
+    modules_idx = Module.objects.filter(log=log).count() + 1
+    for module_item in video_dict['sections']:
+        most_viewed_video_id = 0
         most_viewed_video_percent = 0.0
-        idx_week += 1
-        idx_video = 0
-        week = Week.objects.get_or_create(
-            date=date,
-            hash_str_id=week_item["section_name"],
-            defaults={'number': idx_week})[0]
-        for video_item in week_item['subsections']:
-            idx_video += 1
-            video_info = video_item['videos'][0]
-            chart_link = make_img(video_info, video_item["subsection_name"], charts_save_path)
-            Video.objects.create(hash_str_id=video_item["subsection_name"],
-                                 week=week, link=video_info['page'],
-                                 number=idx_video,
-                                 chart_link=chart_link,
-                                 material_viewed=video_info['watched_percent'],
-                                 users_watched=video_info['user_percent'],
-                                 is_most_viewed=False)
-            if video_info['user_percent'] > most_viewed_video_percent:
-                most_viewed_video_hash_str = video_item["subsection_name"]
-                most_viewed_video_percent = video_info['user_percent']
-        Video.objects.filter(hash_str_id=most_viewed_video_hash_str, week=week).update(is_most_viewed=True)
+        module = Module.objects.get_or_create(
+            log=log,
+            hash_str_id=module_item["section_name"],
+            defaults={'number': modules_idx})
+        if module[1]:
+            modules_idx += 1
+        module = module[0]
+        lessons_idx = Lesson.objects.filter(module=module).count() + 1
+        for lesson_item in module_item['subsections']:
+            lesson = Lesson.objects.get_or_create(hash_str_id=lesson_item['subsection_name'],
+                                                  module=module,
+                                                  link='/'.join(
+                                                      ['http:',
+                                                       '',
+                                                       'courses.openedu.ru',
+                                                       'courses',
+                                                       video_dict['course_name'],
+                                                       'courseware',
+                                                       module_item["section_name"],
+                                                       lesson_item['subsection_name']]),
+                                                  defaults={'number': lessons_idx})
+            if lesson[1]:
+                lessons_idx += 1
+            lesson = lesson[0]
+            videos_idx = 1
+            for video_item in lesson_item['videos']:
+                chart_link = make_img(video_item, lesson_item["subsection_name"], charts_save_path)
+                video = Video.objects.create(lesson=lesson,
+                                             chart_link=chart_link,
+                                             number=videos_idx,
+                                             material_viewed=video_item['watched_percent'],
+                                             users_watched=video_item['user_percent'],
+                                             is_most_viewed=False)
+                if video_item['user_percent'] > most_viewed_video_percent:
+                    most_viewed_video_id = video.id
+                    most_viewed_video_percent = video_item['user_percent']
+            Video.objects.filter(id=most_viewed_video_id, lesson=lesson).update(is_most_viewed=True)
 
 
 def make_img(video_info, video_hash_str_id, save_path):

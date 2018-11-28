@@ -4,3 +4,5 @@
 *.pyc*
 mainapp/profiles/*
 mainapp/static/admin/*
+mainapp/migrations/*
+.idea
