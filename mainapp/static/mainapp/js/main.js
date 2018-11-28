@@ -138,27 +138,12 @@ $(document).ready(function () {
     }
     var h = $(this).height();
     $(".row-courses-list").height(h);
-    if (!$.removeCookie('is_reload_success'))
-        $(".alert-course-upload-success").hide();
-    else {
-        setTimeout(function () {
-            $(".alert-course-upload-success").hide('slow');
-        }, 4000);
-    }
-    if (!$.removeCookie('is_reload_error'))
-        $(".alert-course-upload-failure").hide();
-    else {
-        setTimeout(function () {
-            $(".alert-course-upload-failure").hide('slow');
-        }, 4000);
-    }
-    if (!$.removeCookie('is_reload_warning'))
-        $(".alert-course-upload-warning").hide();
-    else {
-        setTimeout(function () {
-            $(".alert-course-upload-warning").hide('slow');
-        }, 4000);
-    }
+    if ($.removeCookie('is_reload_success'))
+        $(".alert-course-upload-success").show();
+    if ($.removeCookie('is_reload_error'))
+        $(".alert-course-upload-failure").show();
+    if ($.removeCookie('is_reload_warning'))
+        $(".alert-course-upload-warning").show();
     $.ajaxSetup({
         beforeSend: function (xhr, settings) {
             var csrf_token = $.cookie('csrftoken');
