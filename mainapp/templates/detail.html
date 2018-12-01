@@ -23,6 +23,14 @@
             <div class="loader_little"></div>
         </div>
     </form>
+    {% if logs_amount > 1 %}
+        <div class="col-auto">
+            <button type="button" class="btn btn-outline-danger btn-delete-course-log" data-toggle="modal"
+                    data-target="#modalDeleteCourseLog">
+                Удалить загрузку
+            </button>
+        </div>
+    {% endif %}
 </div>
 <hr>
 <!--Статистика-->
@@ -38,12 +46,9 @@
                 <details>
                     <summary class="videos-statistic">Статистика по лекционным видео</summary>
                     {% for video in lesson.videos %}
-                        <div class="video">
-                            <p>
-                                Видео №{{ video.number }}
-                            </p>
+                        <div class="video-statistic-{{ video.number }}">
                             <details>
-                                <summary>Подробнее</summary>
+                                <summary>Видео №{{ video.number }}</summary>
                                 <p>Процент просмотренных материалов : <span>{{ video.get_material_viewed }}%</span>
                                 </p>
                                 <p>Процент пользователей, смотревших видео :

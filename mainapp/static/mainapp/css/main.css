@@ -93,6 +93,11 @@ label {
     color: black;
 }
 
+.btn-delete-course-log {
+    margin-top: 10px;
+    height: 45px;
+}
+
 /*Колонка детальной информации курса*/
 .row-course-detail {
     margin-top: -11px;
@@ -167,7 +172,7 @@ input[name=log]::-webkit-file-upload-button {
 .btn-submit-course {
     margin-top: 10px;
     height: 45px;
-    color: green
+    color: green;
 }
 
 /*разделители*/
@@ -178,6 +183,11 @@ hr {
 /*Блок статистики*/
 .course-statistic-panel {
     display: inline;
+}
+
+.span-update-course {
+    font-weight: bold;
+    margin-top: 1px;
 }
 
 /*Блок добавления курса*/
@@ -192,6 +202,22 @@ hr {
 .tests-statistic, .videos-statistic {
     text-indent: 2em;
     font-size: 21px;
+}
+
+[class^=video-statistic-] > details > img {
+    margin-left: 6em;
+    font-size: 19px;
+    text-indent: 0;
+}
+
+[class^=video-statistic-], [class^=video-statistic-] > details > summary {
+    text-indent: 4em;
+    font-size: 20px;
+}
+
+[class^=video-statistic-] > details {
+    text-indent: 6em;
+    font-size: 19px;
 }
 
 [class^=test-attempts-statistic-] {

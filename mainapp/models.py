@@ -12,6 +12,7 @@ class Course(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     title = models.CharField(max_length=50)
     russian_title = models.CharField(max_length=100)
+    hash_str_id = models.CharField(max_length=50)
 
 
 class Log(models.Model):

@@ -1,6 +1,4 @@
-import os
-import json
-import datetime
+import os, hashlib, json, datetime
 from mainapp.modules.analysis import analysis
 from mainapp.modules.preprocessing import log_parser
 import matplotlib.pyplot as plt
@@ -20,6 +18,7 @@ def get_split_path(path):
 
 
 def save_file(file, path, user, title):
+    md5_hash = hashlib.md5(file.name.encode()).hexdigest()
     dirs = os.sep.join(path.split(os.sep)[:-1])
     split_path = get_split_path(dirs)
     save_path = []
@@ -46,21 +45,26 @@ def save_file(file, path, user, title):
     json_files = make_analytic_json(file.name, dirs, save_path)
     os.remove(path)
     if json_files is not None:
-        parse_json_to_database(*json_files, user, title, charts_save_path)
+        return parse_json_to_database(*json_files, user, title, charts_save_path, md5_hash)
+    else:
+        return 0
 
 
-def parse_json_to_database(video_json_file_path, tests_json_file_path, user, russian_title, charts_save_path):
+def parse_json_to_database(video_json_file_path, tests_json_file_path, user, russian_title, charts_save_path, md5_hash):
     with open(video_json_file_path, "r") as video_json_file:
         video_dict = json.load(video_json_file)
     with open(tests_json_file_path, "r") as tests_json_file:
         tests_dict = json.load(tests_json_file)
         course = Course.objects.get_or_create(user=user,
                                               title=list(tests_dict.keys())[0],
-                                              russian_title=russian_title)[0]
+                                              russian_title=russian_title,
+                                              defaults={'hash_str_id': md5_hash}
+                                              )[0]
     log = Log.objects.create(course=course,
                              load_date=datetime.datetime.now())
     parse_tests_json(tests_dict, log)
     parse_video_json(video_dict, log, charts_save_path)
+    return course.id
 
 
 def parse_tests_json(tests_dict, log):
@@ -149,7 +153,7 @@ def parse_video_json(video_dict, log, charts_save_path):
 
 
 def make_img(video_info, video_hash_str_id, save_path):
-    save_path = os.path.join(save_path, video_hash_str_id + '.png')
+    save_path = os.path.join(save_path, hashlib.blake2b(str(datetime.datetime.now()).encode()).hexdigest() + '.png')
     plt.plot(np.linspace(0, video_info['length'], video_info['intervals_number']), video_info['review_intervals'])
     plt.savefig(save_path, dpi=600)
     plt.close()

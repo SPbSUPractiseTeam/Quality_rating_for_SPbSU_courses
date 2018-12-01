@@ -1,27 +1,109 @@
 {% extends 'base.html' %}
 {% block content %}
     <div class="container-fluid background">
+        <div class="modal fade" id="modalDeleteCourseLog" tabindex="-1" role="dialog"
+             aria-labelledby="modalDeleteCourseLogTitle" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title modal-delete-log_title">Удаление загрузки</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        Вы действительно хотите удалить данную загрузку?
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Отмена</button>
+                        <button type="button" class="btn btn-danger btn-delete_course_log">Удалить</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="modal fade" id="modalDeleteCourse" tabindex="-1" role="dialog"
+             aria-labelledby="modalDeleteCourseTitle" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title modal-delete_title">Удаление курса</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        Вы действительно хотите удалить курс?
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Отмена</button>
+                        <button type="button" class="btn btn-danger btn-delete_course">Удалить</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="modal fade" id="modalUpdateCourse" tabindex="-1" role="dialog"
+             aria-labelledby="modalUpdateCourseTitle" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title modal-update_title">Изменение названия для курса</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="w-100 form-group">
+                            <input type="text" class="form-control new_course_title">
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary float-right" data-dismiss="modal">
+                                Отмена
+                            </button>
+                            <button type="button" class="btn btn-success float-right btn-update_course">Изменить
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
         <div class="row">
             <div class="col-3 row-courses-list">
                 <!--КНОПКИ ВЫБОРА ДОСТУПНЫХ КУРСОВ-->
                 {% for course in courses %}
-                    <button type="button" class="btn btn-default btn-course"
-                            id="course-{{ course.id }}">{{ course.russian_title }}</button>
+                    <div class="btn btn-default btn-course py-3 px-2">
+                        <a id="course-{{ course.id }}">{{ course.russian_title }}</a>
+                        <span aria-hidden="true" class="span-delete-course float-right pl-1" data-toggle="modal"
+                              data-target="#modalDeleteCourse">&#128473;</span>
+                        <span aria-hidden="true" class="span-update-course float-right pr-1" data-toggle="modal"
+                              data-target="#modalUpdateCourse">&#128393;</span>
+                    </div>
                     <hr>
                 {% endfor %}
                 <button type="button" class="btn btn-default btn-add-course">Добавить новый курс</button>
             </div>
             <div class="col-9 row-course-detail">
                 <div class="add-course-panel">
-                    <div class="alert alert-success alert-course-upload-success" role="alert">
-                        Курс был успешно загружен в систему
-                    </div>
-                    <div class="alert alert-danger alert-course-upload-failure" role="alert">
-                        К сожалению, не удалось загрузить курс в систему
-                    </div>
-                    <div class="alert alert-warning alert-course-upload-warning" role="alert">
-                        Данный курс уже существует в системе. Пожалуйста, загрузите данный лог-файл через форму в курсе.
-                    </div>
+                </div>
+                <div class="alert alert-success alert-course-delete-success mt-3" role="alert">
+                    Курс был успешно удален из системы
+                </div>
+                <div class="alert alert-danger alert-course-delete-failure mt-3" role="alert">
+                    К сожалению, не удалось удалить курс
+                </div>
+                <div class="alert alert-danger alert-log-delete-failure mt-3" role="alert">
+                    К сожалению, не удалось удалить загрузку
+                </div>
+                <div class="alert alert-danger alert-course-update-failure mt-3" role="alert">
+                    К сожалению, не удалось переименовать курс
+                </div>
+                <div class="alert alert-danger alert-course-upload-failure mt-3" role="alert">
+                    К сожалению, не удалось загрузить курс в систему
+                </div>
+                <div class="alert alert-warning alert-course-upload-warning mt-3" role="alert">
+                    Данный курс уже существует в системе. Пожалуйста, загрузите данный лог-файл через форму в курсе
                 </div>
                 <div class="col-9 course-statistic-panel">
                 </div>
