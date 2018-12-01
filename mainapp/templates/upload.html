@@ -1,5 +1,5 @@
 {% load add_attr %}
-<form class="form-add-course" method="post" enctype="multipart/form-data">
+<form class="form-add-course py-2" method="post" enctype="multipart/form-data">
     {% csrf_token %}
     <div class="form-group">
         <label>{{ form.title.label }}</label>
