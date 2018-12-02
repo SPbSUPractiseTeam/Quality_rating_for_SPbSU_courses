@@ -1,5 +1,4 @@
 import os, shutil, hashlib
-from unidecode import unidecode
 
 from django.core.mail import EmailMessage
 from django.conf import settings

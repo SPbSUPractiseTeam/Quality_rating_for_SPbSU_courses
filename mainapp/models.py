@@ -5,7 +5,7 @@ from enum import Enum
 
 class TestTypeChoice(Enum):
     CHK = "Проверочный тест"
-    CTRL = "Котнрольный тест"
+    CTRL = "Контрольный тест"
 
 
 class Course(models.Model):

@@ -139,7 +139,7 @@ def parse_video_json(video_dict, log, charts_save_path):
             lesson = lesson[0]
             videos_idx = 1
             for video_item in lesson_item['videos']:
-                chart_link = make_img(video_item, lesson_item["subsection_name"], charts_save_path)
+                chart_link = make_img(video_item, charts_save_path)
                 video = Video.objects.create(lesson=lesson,
                                              chart_link=chart_link,
                                              number=videos_idx,
@@ -152,7 +152,7 @@ def parse_video_json(video_dict, log, charts_save_path):
             Video.objects.filter(id=most_viewed_video_id, lesson=lesson).update(is_most_viewed=True)
 
 
-def make_img(video_info, video_hash_str_id, save_path):
+def make_img(video_info, save_path):
     save_path = os.path.join(save_path, hashlib.blake2b(str(datetime.datetime.now()).encode()).hexdigest() + '.png')
     plt.plot(np.linspace(0, video_info['length'], video_info['intervals_number']), video_info['review_intervals'])
     plt.savefig(save_path, dpi=600)

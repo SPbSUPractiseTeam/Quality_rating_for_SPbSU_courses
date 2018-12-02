@@ -1,74 +1,42 @@
-$("a[id|='course']").on("click", function () {
+function courseClickHandler() {
     $(".course-statistic-panel").show();
     $(".add-course-panel").hide();
     $(this).addClass('active');
-    var id = $(this).attr('id').split('-')[1];
-    parameters_changed({course_id: id});
-});
+    let id = $(this).attr('id').split('-')[1];
+    parametersChanged({course_id: id});
+}
 
-$(".bi-pencil").on('click', function () {
-    $(this).prev('a').replaceWith()
-});
-
-$('#modalDeleteCourse').on('show.bs.modal', function (event) {
-    var button = $(event.relatedTarget);
-    var button_link = $(event.relatedTarget).prevAll('a');
-    var modal_header = $('.modal-delete_title');
+function courseModalDisplayingHandler(event, operation) {
+    let button_link = $(event.relatedTarget).prevAll('a');
+    let modal_header = $(`.modal-${operation}_title`);
     modal_header.html(modal_header.html() + " \"" + button_link.text() + "\"");
-    $(this).attr('data-course_to_delete', button_link.attr('id').split('-')[1]);
-});
+    $(this).attr(`data-course_to_${operation}`, button_link.attr('id').split('-')[1]);
+}
 
-$('#modalUpdateCourse').on('show.bs.modal', function (event) {
-    var button = $(event.relatedTarget);
-    var button_link = $(event.relatedTarget).prevAll('a');
-    var modal_header = $('.modal-update_title');
-    modal_header.html(modal_header.html() + " \"" + button_link.text() + "\"");
-    $(this).attr('data-course_to_update', button_link.attr('id').split('-')[1]);
-});
 
-$('#modalDeleteCourseLog').on('show.bs.modal', function (event) {
-    var button = $(event.relatedTarget);
+function deleteCourseLogModalDisplayingHandler() {
     $(this).attr('data-log_to_delete', $(".sel-log").val());
-});
+}
 
-$(".btn-delete_course").on("click", function () {
+function deleteItemClickHandler(item) {
+    let data = {};
+    data[`${item}_id`] = $(this).parents('.modal').attr(`data-${item}_to_delete`);
     $.ajax({
         type: "POST",
-        url: "/delete_course",
-        data: {
-            'course_id': $(this).parents('.modal').attr('data-course_to_delete'),
+        url: `/delete_${item}`,
+        data: data,
+        success: function () {
+            $.cookie(`is_reload_delete_${item}_success`, 'true');
         },
-        success: function (data) {
-            $.cookie('is_reload_delete_success', 'true');
-            location.reload();
-        },
-        error: function (data) {
-            $.cookie('is_reload_delete_error', 'true');
-            location.reload();
+        error: function () {
+            $.cookie(`is_reload_delete_${item}_error`, 'true');
         }
     });
-});
+    location.reload();
+}
 
-$(".btn-delete_course_log").on("click", function () {
-    $.ajax({
-        type: "POST",
-        url: "/delete_log",
-        data: {
-            'log_id': $(this).parents('.modal').attr('data-log_to_delete'),
-        },
-        success: function (data) {
-            $.cookie('is_reload_delete_log_success', 'true');
-            location.reload();
-        },
-        error: function (data) {
-            $.cookie('is_reload_delete_log_error', 'true');
-            location.reload();
-        }
-    });
-});
-
-$(".btn-update_course").on("click", function () {
-    var course_id = $(this).parents('.modal').attr('data-course_to_update');
+function updateCourseClickHandler() {
+    let course_id = $(this).parents('.modal').attr('data-course_to_update');
     $.ajax({
         type: "POST",
         url: "/update_course_title",
@@ -76,18 +44,75 @@ $(".btn-update_course").on("click", function () {
             'course_id': course_id,
             'title': $('.new_course_title').val()
         },
-        success: function (data) {
+        success: function () {
             $.cookie('current_course_id', course_id);
-            location.reload();
         },
-        error: function (data) {
-            $.cookie('is_reload_update_error', 'true');
-            location.reload();
+        error: function () {
+            $.cookie('is_reload_update_course_error', 'true');
         }
     });
-});
+    location.reload();
+}
 
-$(".btn-add-course").on("click", function () {
+function addCourseFormSubmitHandler(event) {
+    event.preventDefault();
+    let course_title = $('.input-course_title').val();
+    let is_course_exists = $(`.btn-course:contains(${course_title})`).length > 0;
+    if (!is_course_exists) {
+        $.removeCookie('is_reload_upload_course_success');
+        $.removeCookie('is_reload_upload_course_error');
+        $.cookie('is_reload_upload_course_warning', 'true');
+        let form_data = new FormData();
+        form_data.append('log', $('.form-control-file').prop('files')[0]);
+        form_data.append('title', course_title);
+        $(".btn-submit-course").hide();
+        $(".loader").show();
+        $.ajax({
+                type: "POST",
+                url: "/upload",
+                data: form_data,
+                processData: false,
+                contentType: false,
+                success: function () {
+                    $.cookie('is_reload_upload_course_success', 'true');
+                },
+                error: function () {
+                    $.cookie('is_reload_upload_course_error', 'true');
+                },
+            }
+        );
+    }
+    location.reload();
+}
+
+function addLogFormSubmitHandler(event) {
+    event.preventDefault();
+    let form_data = new FormData();
+    form_data.append('log', $('.form-control-file').prop('files')[0]);
+    form_data.append('title', $("a[id^='course-'][class='active']").text());
+    form_data.append('course_id', options.course_id);
+    form_data.append('log_id', options.log_id);
+    form_data.append('module_id', options.module_id);
+    $(".btn-submit-course").hide();
+    $(".loader_little").show();
+    $.ajax({
+            type: "POST",
+            url: "/detail",
+            data: form_data,
+            processData: false,
+            contentType: false,
+            success: function () {
+                $.cookie('is_reload_upload_course_success', 'true');
+            },
+            error: function () {
+                $.cookie('is_reload_upload_course_error', 'true');
+            },
+        }
+    );
+    location.reload();
+}
+
+function addCourseClickHandler() {
     $(".course-statistic-panel").hide();
     $(".add-course-panel").show();
     $.ajax({
@@ -97,65 +122,24 @@ $(".btn-add-course").on("click", function () {
             success: function (data) {
                 $('.add-course-panel').html(data);
                 $(".loader").hide();
-                $('.form-add-course').on("submit", function (event) {
-                    event.preventDefault();
-                    var is_course_exists = false;
-                    $(".btn-course").each(function () {
-                        if ($(this).text() === $('.form-control').val()) {
-                            $.removeCookie('is_reload_upload_success');
-                            $.removeCookie('is_reload_upload_error');
-                            $.cookie('is_reload_upload_warning', 'true');
-                            is_course_exists = true;
-                        }
-                    });
-                    if (!is_course_exists) {
-                        var form_data = new FormData();
-
-                        form_data.append('log', $('.form-control-file').prop('files')[0]);
-                        form_data.append('title', $('.input-course_title').val());
-                        $(".btn-submit-course").hide();
-                        $(".loader").show();
-                        $.ajax({
-                                type: "POST",
-                                url: "/upload",
-                                data: form_data,
-                                processData: false,
-                                contentType: false,
-                                success: function (data) {
-                                    $.cookie('is_reload_upload_success', 'true');
-                                    $(location).attr("href", '/');
-                                },
-                                error: function (jqXHR, textStatus, errorThrown) {
-                                    $.cookie('is_reload_upload_error', 'true');
-                                    location.reload();
-                                },
-                            }
-                        );
-                    }
-                    else
-                        location.reload();
-                });
+                $('.form-add-course').on("submit", addCourseFormSubmitHandler(event));
             }
         }
     );
-});
+}
 
-$(document).on('change', '.sel-module', function () {
-    var id = $(this).val();
-    parameters_changed({module_id: id});
-});
+function selectChangeHandler(item) {
+    let params = {};
+    params[`${item}_id`] = $(this).val();
+    parametersChanged(params);
+}
 
-$(document).on('change', '.sel-log', function () {
-    var id = $(this).val();
-    parameters_changed({log_id: id});
-});
-
-function parameters_changed(options) {
+function parametersChanged(options) {
     if (options.course_id === undefined) {
         options.course_id = $("a[id^='course-'][class='active']").attr('id').split('-')[1];
     }
     if (options.log_id === undefined) {
-        current_log = $(".sel-log").val();
+        let current_log = $(".sel-log").val();
         if (current_log !== undefined)
             options.log_id = current_log;
         else
@@ -179,35 +163,9 @@ function parameters_changed(options) {
                 if (options.module_id !== -1)
                     $('.sel-module').val(options.module_id);
                 $("a[id='[course-" + options.course_id + "]'").addClass('active');
-                var h = $('.row-course-detail').height();
+                let h = $('.row-course-detail').height();
                 $(".row-courses-list").height(h);
-                $('.form-add-log').on('submit', function (event) {
-                    event.preventDefault();
-                    var form_data = new FormData();
-                    form_data.append('log', $('.form-control-file').prop('files')[0]);
-                    form_data.append('title', $("a[id^='course-'][class='active']").text());
-                    form_data.append('course_id', options.course_id);
-                    form_data.append('log_id', options.log_id);
-                    form_data.append('module_id', options.module_id);
-                    $(".btn-submit-course").hide();
-                    $(".loader_little").show();
-                    $.ajax({
-                            type: "POST",
-                            url: "/detail",
-                            data: form_data,
-                            processData: false,
-                            contentType: false,
-                            success: function (data) {
-                                $.cookie('is_reload_upload_success', 'true');
-                                location.reload();
-                            },
-                            error: function (jqXHR, textStatus, errorThrown) {
-                                $.cookie('is_reload_upload_error', 'true');
-                                location.reload();
-                            },
-                        }
-                    );
-                });
+                $('.form-add-log').on('submit', addLogFormSubmitHandler(event));
             }
         }
     );
@@ -217,10 +175,43 @@ function csrfSafeMethod(method) {
     return (/^(GET|HEAD|OPTIONS|TRACE)$/.test(method));
 }
 
+function makeHandlers() {
+    $("a[id|='course']").on("click", courseClickHandler);
+    $('#modalDeleteCourse').on('show.bs.modal', courseModalDisplayingHandler(event, 'delete'));
+    $('#modalUpdateCourse').on('show.bs.modal', courseModalDisplayingHandler(event, 'update'));
+    $('#modalDeleteCourseLog').on('show.bs.modal', deleteCourseLogModalDisplayingHandler(event));
+    $(".btn-delete_course").on("click", deleteItemClickHandler('course'));
+    $(".btn-delete_course_log").on("click", deleteItemClickHandler('log'));
+    $(".btn-update_course").on("click", updateCourseClickHandler());
+    $(".btn-add-course").on("click", addCourseClickHandler());
+    $(document).on('change', '.sel-log', selectChangeHandler('log'));
+    $(document).on('change', '.sel-module', selectChangeHandler('module'));
+}
+
+function showAlertsByCookies() {
+    if ($.removeCookie('is_reload_delete_course_success'))
+        $(".alert-course-delete-success").show();
+    else if (!$.removeCookie('is_reload_upload_course_success') && !$.removeCookie('is_reload_delete_log_success'))
+        $.cookie('current_course_id', -1);
+    const cookieToAlertDict = {
+        'is_reload_delete_course_error': ".alert-course-delete-failure",
+        'is_reload_delete_log_error': ".alert-log-delete-failure",
+        'is_reload_update_course_error': ".alert-course-update-failure",
+        'is_reload_upload_course_error': ".alert-course-upload-failure",
+        'is_reload_upload_course_warning': ".alert-course-upload-warning"
+    };
+    for (let cookie in cookieToAlertDict)
+        if ($.removeCookie(cookie))
+            $(cookieToAlertDict[cookie]).show();
+    if ($.cookie('current_course_id') !== -1)
+        $('#course-' + $.cookie('current_course_id')).trigger('click');
+}
+
 $(document).ready(function () {
+    makeHandlers();
     $.ajaxSetup({
         beforeSend: function (xhr, settings) {
-            var csrf_token = $.cookie('csrftoken');
+            let csrf_token = $.cookie('csrftoken');
             if (!csrfSafeMethod(settings.type) && !this.crossDomain) {
                 xhr.setRequestHeader("X-CSRFToken", csrf_token);
             }
@@ -231,23 +222,7 @@ $(document).ready(function () {
             $(location).attr("href", '/');
         }, 1000);
     }
-    var h = $(this).height();
+    let h = $(this).height();
     $(".row-courses-list").height(h);
-    if ($.removeCookie('is_reload_delete_success'))
-        $(".alert-course-delete-success").show();
-    else if (!$.removeCookie('is_reload_upload_success') && !$.removeCookie('is_reload_delete_log_success'))
-        $.cookie('current_course_id', -1);
-    if ($.removeCookie('is_reload_delete_error'))
-        $(".alert-course-delete-failure").show();
-    if ($.removeCookie('is_reload_delete_log_error'))
-        $(".alert-log-delete-failure").show();
-    if ($.removeCookie('is_reload_update_error'))
-        $(".alert-course-update-failure").show();
-    if ($.removeCookie('is_reload_upload_error'))
-        $(".alert-course-upload-failure").show();
-    if ($.removeCookie('is_reload_upload_warning'))
-        $(".alert-course-upload-warning").show();
-    if ($.cookie('current_course_id') !== -1) {
-        $('#course-' + $.cookie('current_course_id')).trigger('click');
-    }
+    showAlertsByCookies();
 });
