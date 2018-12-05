@@ -1,12 +1,24 @@
-# Quality_rating_for_SPbSU_courses
-Скоро здесь появится инструкция, с помощью которой вы сможете воспользоваться сервисом.
-## Предпосылки для использования
-Скоро здесь будет описано, в каком формате вам нужно иметь исходные данные для анализа.
-### Состав команды и роли:
-Иван Мараховский - тим лид, фронтэнд <br>
-Ирина Цеханович - менеджер проекта, qa <br>
-Глазырин Антон - аналитик, анализ данных <br>
-Дмитрий Давыдов - анализ данных <br>
-Светлана Сорокина - анализ данных <br>
-Константин Кудрявцев - препроцессинг данных <br>
-Виктор Зелюков - бекэнд
+# Quality evaluation of SPbU online courses
+ The purpose of this web service is to help supervisors of online courses fix flaws and errors in them, thereby improving their quality, popularizing them and making their completion more desirable to potential employers.
+## How it works
+In order to use the service you have to register an account, add your course and upload user logs of your course (.bin).
+
+The response would be the following statistical information:
+* Video content statistics:number of watched videos (% of total videos), number of users who watched each video (% of total users), diagram of rewatched moments.
+* Tests statistics: attempts statistics - percent of correct answers to each question, mean of test scores, median of test scores, total number of test participants.
+
+Based on this data you can alter, for example, those videos that have been viewed the most or you can improve a test that many students have failed.
+### The team:
+Ivan Marakhovskiy - team leader, front-end development
+
+Irina Tsekhanovich - project management, QA
+
+Anton Glazyrin - analysis, data science
+
+Dmitriy Davydov - data science
+
+Svetlana Sorokina - data science
+
+Konstantin Kudryavtsev - data preprocessing
+
+Victor Zelyukov - back-end development
