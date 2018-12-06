@@ -69,21 +69,23 @@ def delete_log(request):
 
 
 def update_course_title(request):
+    response = HttpResponseBadRequest()
     if 'course_id' not in request.POST:
-        return HttpResponseBadRequest("Ошибочный запрос")
+        response.write("Ошибочный запрос")
     else:
         course_id = int(request.POST['course_id'])
         new_title = request.POST['title']
         course = Course.objects.filter(id=course_id)
         if len(course) != 1:
-            return HttpResponseBadRequest("Курс не существует")
+            response.write("Курс не существует")
         elif course[0].user != request.user:
-            return HttpResponseBadRequest("У вас нет доступа для изменения данного курса")
+            response.write("У вас нет доступа для изменения данного курса")
         elif course[0].russian_title == new_title:
-            return HttpResponseBadRequest("Название курса не изменено")
+            response.write("Название курса не изменено")
         else:
             course.update(russian_title=new_title)
             return HttpResponse()
+        return response
 
 
 def upload_file(request):

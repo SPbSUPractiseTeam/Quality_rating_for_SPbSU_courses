@@ -1,12 +1,14 @@
 function courseClickHandler() {
     $(".course-statistic-panel").show();
     $(".add-course-panel").hide();
-    $(this).addClass('active');
+    $(this).parent().addClass('active');
+    $(this).parent().attr('aria-pressed', "true");
     let id = $(this).attr('id').split('-')[1];
     parametersChanged({course_id: id});
 }
 
-function courseModalDisplayingHandler(event, operation) {
+function courseModalDisplayingHandler(event) {
+    let operation = event.data.operation;
     let button_link = $(event.relatedTarget).prevAll('a');
     let modal_header = $(`.modal-${operation}_title`);
     modal_header.html(modal_header.html() + " \"" + button_link.text() + "\"");
@@ -18,7 +20,8 @@ function deleteCourseLogModalDisplayingHandler() {
     $(this).attr('data-log_to_delete', $(".sel-log").val());
 }
 
-function deleteItemClickHandler(item) {
+function deleteItemClickHandler(event) {
+    let item = event.data.item;
     let data = {};
     data[`${item}_id`] = $(this).parents('.modal').attr(`data-${item}_to_delete`);
     $.ajax({
@@ -27,12 +30,13 @@ function deleteItemClickHandler(item) {
         data: data,
         success: function () {
             $.cookie(`is_reload_delete_${item}_success`, 'true');
+            location.reload();
         },
         error: function () {
             $.cookie(`is_reload_delete_${item}_error`, 'true');
+            location.reload();
         }
     });
-    location.reload();
 }
 
 function updateCourseClickHandler() {
@@ -45,13 +49,15 @@ function updateCourseClickHandler() {
             'title': $('.new_course_title').val()
         },
         success: function () {
+            $.cookie('is_reload_update_course_success', 'true');
             $.cookie('current_course_id', course_id);
+            location.reload();
         },
         error: function () {
             $.cookie('is_reload_update_course_error', 'true');
+            location.reload();
         }
     });
-    location.reload();
 }
 
 function addCourseFormSubmitHandler(event) {
@@ -61,7 +67,6 @@ function addCourseFormSubmitHandler(event) {
     if (!is_course_exists) {
         $.removeCookie('is_reload_upload_course_success');
         $.removeCookie('is_reload_upload_course_error');
-        $.cookie('is_reload_upload_course_warning', 'true');
         let form_data = new FormData();
         form_data.append('log', $('.form-control-file').prop('files')[0]);
         form_data.append('title', course_title);
@@ -75,14 +80,19 @@ function addCourseFormSubmitHandler(event) {
                 contentType: false,
                 success: function () {
                     $.cookie('is_reload_upload_course_success', 'true');
+                    location.reload();
                 },
                 error: function () {
                     $.cookie('is_reload_upload_course_error', 'true');
+                    location.reload();
                 },
             }
         );
     }
-    location.reload();
+    else {
+        $.cookie('is_reload_upload_course_warning', 'true');
+        location.reload();
+    }
 }
 
 function addLogFormSubmitHandler(event) {
@@ -103,13 +113,14 @@ function addLogFormSubmitHandler(event) {
             contentType: false,
             success: function () {
                 $.cookie('is_reload_upload_course_success', 'true');
+                location.reload();
             },
             error: function () {
                 $.cookie('is_reload_upload_course_error', 'true');
+                location.reload();
             },
         }
     );
-    location.reload();
 }
 
 function addCourseClickHandler() {
@@ -122,13 +133,14 @@ function addCourseClickHandler() {
             success: function (data) {
                 $('.add-course-panel').html(data);
                 $(".loader").hide();
-                $('.form-add-course').on("submit", addCourseFormSubmitHandler(event));
+                $('.form-add-course').on("submit", addCourseFormSubmitHandler);
             }
         }
     );
 }
 
-function selectChangeHandler(item) {
+function selectChangeHandler(event) {
+    let item = event.data.item;
     let params = {};
     params[`${item}_id`] = $(this).val();
     parametersChanged(params);
@@ -165,7 +177,7 @@ function parametersChanged(options) {
                 $("a[id='[course-" + options.course_id + "]'").addClass('active');
                 let h = $('.row-course-detail').height();
                 $(".row-courses-list").height(h);
-                $('.form-add-log').on('submit', addLogFormSubmitHandler(event));
+                $('.form-add-log').on('submit', addLogFormSubmitHandler);
             }
         }
     );
@@ -177,21 +189,23 @@ function csrfSafeMethod(method) {
 
 function makeHandlers() {
     $("a[id|='course']").on("click", courseClickHandler);
-    $('#modalDeleteCourse').on('show.bs.modal', courseModalDisplayingHandler(event, 'delete'));
-    $('#modalUpdateCourse').on('show.bs.modal', courseModalDisplayingHandler(event, 'update'));
-    $('#modalDeleteCourseLog').on('show.bs.modal', deleteCourseLogModalDisplayingHandler(event));
-    $(".btn-delete_course").on("click", deleteItemClickHandler('course'));
-    $(".btn-delete_course_log").on("click", deleteItemClickHandler('log'));
-    $(".btn-update_course").on("click", updateCourseClickHandler());
-    $(".btn-add-course").on("click", addCourseClickHandler());
-    $(document).on('change', '.sel-log', selectChangeHandler('log'));
-    $(document).on('change', '.sel-module', selectChangeHandler('module'));
+    $('#modalDeleteCourse').on('show.bs.modal', {operation: 'delete'}, courseModalDisplayingHandler);
+    $('#modalUpdateCourse').on('show.bs.modal', {operation: 'update'}, courseModalDisplayingHandler);
+    $('#modalDeleteCourseLog').on('show.bs.modal', deleteCourseLogModalDisplayingHandler);
+    $(".btn-delete_course").on("click", {item: 'course'}, deleteItemClickHandler);
+    $(".btn-delete_course_log").on("click", {item: 'log'}, deleteItemClickHandler);
+    $(".btn-update_course").on("click", updateCourseClickHandler);
+    $(".btn-add-course").on("click", addCourseClickHandler);
+    $(document).on('change', '.sel-log', {item: 'log'}, selectChangeHandler);
+    $(document).on('change', '.sel-module', {item: 'module'}, selectChangeHandler);
 }
 
 function showAlertsByCookies() {
     if ($.removeCookie('is_reload_delete_course_success'))
         $(".alert-course-delete-success").show();
-    else if (!$.removeCookie('is_reload_upload_course_success') && !$.removeCookie('is_reload_delete_log_success'))
+    else if (!$.removeCookie('is_reload_upload_course_success') &&
+        !$.removeCookie('is_reload_delete_log_success') &&
+        !$.removeCookie('is_reload_update_course_success'))
         $.cookie('current_course_id', -1);
     const cookieToAlertDict = {
         'is_reload_delete_course_error': ".alert-course-delete-failure",
