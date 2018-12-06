@@ -96,6 +96,7 @@ function addCourseFormSubmitHandler(event) {
 }
 
 function addLogFormSubmitHandler(event) {
+    options = event.data.options;
     event.preventDefault();
     let form_data = new FormData();
     form_data.append('log', $('.form-control-file').prop('files')[0]);
@@ -177,7 +178,7 @@ function parametersChanged(options) {
                 $("a[id='[course-" + options.course_id + "]'").addClass('active');
                 let h = $('.row-course-detail').height();
                 $(".row-courses-list").height(h);
-                $('.form-add-log').on('submit', addLogFormSubmitHandler);
+                $('.form-add-log').on('submit', {options: options}, addLogFormSubmitHandler);
             }
         }
     );
