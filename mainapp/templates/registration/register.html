@@ -1,0 +1,57 @@
+{% extends 'base.html' %}
+{% block content %}
+    {% load add_attr %}
+    {% load recaptcha2 %}
+    {% recaptcha_init %}
+    <div class="container-fluid">
+        {% if form.errors %}
+            <div class="alert alert-danger" role="alert">
+                Не удаётся зарегистрироваться. Пожалуйста, проверьте корректность вводимых данных.
+            </div>
+        {% endif %}
+        <div class="py-5 row justify-content-center">
+            {% if user.is_authenticated %}
+                <div class="row page align-items-center justify-content-center">
+                    <div class="jumbotron bg-white">
+                        <p class="text-center display-3 is-already-authenticated">
+                            Вы уже вошли в систему
+                        </p>
+                        <p class="text-center lead">
+                            Сейчас вы будете перенаправлены на страницу списка курсов
+                        </p>
+                    </div>
+                </div>
+            {% else %}
+                <form class="form-register align-self-center border border-secondary col-xs-4 p-5" action=""
+                      method="post">
+                    {% csrf_token %}
+                    {% for field in form %}
+                        <div class="form-group">
+                            {% if field.name != 'captcha' %}
+                                <label class="label-{{ field.name }}"><b>{{ field.label }}</b></label>
+                            {% endif %}
+                            {% if field.help_text %}
+                                <div class="alert alert-dark" role="alert">
+                                    {{ field.help_text }}
+                                </div>
+                            {% endif %}
+                            {{ field|add_attr:"class:form-control" }}
+                            {% if field.errors %}
+                                <p class="info-error">
+                                    {% for error in field.errors %}
+                                        <div class="alert alert-danger" role="alert">
+                                            {{ error }}
+                                        </div>
+                                    {% endfor %}
+                            {% endif %}
+                        </div>
+
+                    {% endfor %}
+                    <div class="form-group">
+                        <button type="submit" class="btn btn-dark btn-sign_in">Зарегистрироваться</button>
+                    </div>
+                </form>
+            {% endif %}
+        </div>
+    </div>
+{% endblock %}

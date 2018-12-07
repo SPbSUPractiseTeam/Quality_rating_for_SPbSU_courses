@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+{% block content %}
+    {% load add_attr %}
+    <div class="container-fluid">
+        {% if form.errors %}
+            <div class="row alert alert-danger" role="alert">
+                Не удается войти. Пожалуйста, проверьте правильность написания логина и пароля.
+            </div>
+        {% endif %}
+        {% if user.is_authenticated %}
+            <div class="row page align-items-center justify-content-center">
+                <div class="jumbotron bg-white">
+                    <p class="text-center display-3 is-already-authenticated">
+                        Вы уже вошли в систему
+                    </p>
+                    <p class="text-center lead">
+                        Сейчас вы будете перенаправлены на страницу списка курсов
+                    </p>
+                </div>
+            </div>
+        {% else %}
+            <div class="row page justify-content-center">
+                <form class="form-auth align-self-center col-xs-4 border border-secondary p-5" action="" method="post">
+                    {% csrf_token %}
+                    {% for field in form %}
+                        <div class="form-group">
+                            <label class="label-{{ field.name }}"><b>{{ field.label }}</b></label>
+                            {{ field|add_attr:"class:form-control" }}
+                        </div>
+                    {% endfor %}
+                    <div class="row justify-content-between">
+                        <div class="col">
+                            <a href="/register" class="btn btn-dark float-left mt-3">Зарегистрироваться</a>
+                        </div>
+                        <div class="col">
+                            <button type="submit" class="btn btn-dark float-right mt-3">Войти</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        {% endif %}
+    </div>
+{% endblock %}

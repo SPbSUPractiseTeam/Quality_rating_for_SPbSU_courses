@@ -1,0 +1,14 @@
+{% load add_attr %}
+<form class="form-add-course py-2" method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    <div class="form-group">
+        <label>{{ form.title.label }}</label>
+        {{ form.title|add_attr:"class:form-control input-course_title" }}
+    </div>
+    <div class="form-group">
+        {{ form.log|add_attr:"class:form-control-file" }}
+    </div>
+    <div class="loader"></div>
+    <button type="submit" class="btn btn-outline-dark btn-submit-course">Добавить</button>
+</form>
+
