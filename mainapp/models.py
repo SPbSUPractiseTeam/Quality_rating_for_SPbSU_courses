@@ -63,6 +63,8 @@ class Video(models.Model):
     material_viewed = models.FloatField()
     users_watched = models.FloatField()
     is_most_viewed = models.BooleanField()
+    link = models.CharField(max_length=300)
+
 
     def get_material_viewed(self):
         return "%.2f" % (self.material_viewed * 100)

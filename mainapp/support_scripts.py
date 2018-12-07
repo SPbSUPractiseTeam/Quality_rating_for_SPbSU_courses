@@ -143,6 +143,7 @@ def parse_video_json(video_dict, log, charts_save_path):
                 video = Video.objects.create(lesson=lesson,
                                              chart_link=chart_link,
                                              number=videos_idx,
+                                             link=video_item['page'],
                                              material_viewed=video_item['watched_percent'],
                                              users_watched=video_item['user_percent'],
                                              is_most_viewed=False)
