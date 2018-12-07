@@ -1,8 +1,10 @@
 function courseClickHandler() {
     $(".course-statistic-panel").show();
     $(".add-course-panel").hide();
-    $(this).parent().addClass('active');
-    $(this).parent().attr('aria-pressed', "true");
+    $(".btn-course").each(function(){
+        $(this).removeClass('active');
+    });
+    $(this).addClass('active');
     let id = $(this).attr('id').split('-')[1];
     parametersChanged({course_id: id});
 }
