@@ -38,7 +38,7 @@
     <p><b>Статистика лекций</b></p>
     {% for lesson in lessons %}
         <p>
-            <a href="{{ lesson.link }}">Лекция №{{ lesson.number }}</a>
+            <a href="{{ lesson.link }}" target="_blank">Лекция №{{ lesson.number }}</a>
         </p>
         <details>
             <summary class="lesson-statistic">Подробная статистика лекции</summary>
@@ -59,7 +59,7 @@
                             </details>
                         </div>
                     {% endfor %}
-                    <p><a href="{{ most_viewed_video.link }}">Видео</a> к которому возвращались чаще всего</p>
+                    <p><a href="{{ most_viewed_video.link }}" target="_blank">Видео</a> к которому возвращались чаще всего</p>
                 </details>
             {% endif %}
             {% if lesson.tests_count > 0 %}
