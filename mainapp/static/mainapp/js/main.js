@@ -1,7 +1,7 @@
 function courseClickHandler() {
     $(".course-statistic-panel").show();
     $(".add-course-panel").hide();
-    $(".btn-course").each(function(){
+    $(".btn-course").each(function () {
         $(this).removeClass('active');
     });
     $(this).addClass('active');
@@ -17,6 +17,29 @@ function courseModalDisplayingHandler(event) {
     $(this).attr(`data-course_to_${operation}`, button_link.attr('id').split('-')[1]);
 }
 
+
+function establishWSConnection() {
+    const webSocket = new WebSocket('ws://' + window.location.host +
+        '/notifications/');
+    const courses_list = document.querySelector(".row-courses-list");
+    webSocket.onmessage = function (e) {
+        alert(e.data.course_title);
+        if (e.data.event = "New Course") {
+            var course = document.createElement("div");
+            course.innerHTML = `<a id=course-${e.data['course_id']}>${e.data['course_title']}</a>` +
+                '<span aria-hidden="true" class="span-delete-course float-right pl-1" data-toggle="modal" data-target="#modalDeleteCourse" title="Удалить курс">🗙</span>\n' +
+                '<span aria-hidden="true" class="span-update-course float-right pr-1" data-toggle="modal" data-target="#modalUpdateCourse" title="Изменить название курса">🖉</span>';
+            course.classList.add("btn");
+            course.classList.add("btn-default");
+            course.classList.add("btn-course");
+            course.classList.add("py-3");
+            course.classList.add("px-2");
+            var last_course = courses_list.lastChild;
+            courses_list.insertBefore(course, last_course);
+        }
+    };
+    document.ws = webSocket;
+}
 
 function deleteCourseLogModalDisplayingHandler() {
     $(this).attr('data-log_to_delete', $(".sel-log").val());
@@ -225,6 +248,7 @@ function showAlertsByCookies() {
 }
 
 $(document).ready(function () {
+    establishWSConnection();
     makeHandlers();
     $.ajaxSetup({
         beforeSend: function (xhr, settings) {

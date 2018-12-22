@@ -22,9 +22,9 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = '-!gt0k387$25=ly-gzn7+z1%46kr&og88(c--#skgt+89auy^l'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
-ALLOWED_HOSTS = ['rikevoltz.pythonanywhere.com']
+ALLOWED_HOSTS = ['127.0.0.1']
 
 # Application definition
 
@@ -36,8 +36,18 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'mainapp',
-    'snowpenguin.django.recaptcha2'
+    'snowpenguin.django.recaptcha2',
+    'channels',
 ]
+
+CHANNEL_LAYERS = {
+    "default": {
+        "BACKEND": "channels_redis.core.RedisChannelLayer",
+        "CONFIG": {
+            "hosts": [("redis://:JG9xo8M4ETguVsNFgSqX1VxELNR6RWsI@redis-15579.c100.us-east-1-4.ec2.cloud.redislabs.com:15579/0")],
+        },
+    },
+}
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -68,7 +78,7 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'Course_analysis_system.wsgi.application'
-
+ASGI_APPLICATION = "mainapp.routing.application"
 # Database
 # https://docs.djangoproject.com/en/2.1/ref/settings/#databases
 
@@ -117,9 +127,9 @@ USE_TZ = True
 TEMPLATE_CONTEXT_PROCESSOR = [
     'django.core.context_processors.media'
 ]
-MEDIA_ROOT = os.path.join(BASE_DIR, 'mainapp','profiles')
+MEDIA_ROOT = os.path.join(BASE_DIR, 'mainapp', 'profiles')
 MEDIA_URL = '/profiles/'
-STATIC_ROOT = os.path.join(BASE_DIR, 'mainapp','static')
+STATIC_ROOT = os.path.join(BASE_DIR, 'mainapp', 'static')
 STATIC_URL = '/static/'
 
 RECAPTCHA_PRIVATE_KEY = '6LdnsHwUAAAAAN7pWtdpvf0xN2qRjpJq7wFUVaEC'
